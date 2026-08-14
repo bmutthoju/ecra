@@ -36,7 +36,7 @@ A claim can appear credible while still being problematic because:
 - a statement has been interpreted beyond what its source establishes;
 - evidence is presented without sufficient provenance;
 - multiple pieces of evidence are combined in a way that creates an
-  unsupported conclusion.
+  unsupported conclusion;
 - an authentic source is presented in a way that materially misrepresents what
   it establishes;
 
