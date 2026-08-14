@@ -1,6 +1,6 @@
 # ECRA — Project Vision
 
-> Status: DRAFT
+> Status: APPROVED
 > Authority: NORMATIVE
 > Generation: GEN1
 
