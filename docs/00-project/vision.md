@@ -38,7 +38,7 @@ A claim can appear credible while still being problematic because:
 - multiple pieces of evidence are combined in a way that creates an
   unsupported conclusion;
 - an authentic source is presented in a way that materially misrepresents what
-  it establishes;
+  it establishes.
 
 These problems are particularly significant when information is generated,
 summarized, transformed, or communicated by automated systems.
