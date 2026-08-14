@@ -37,6 +37,8 @@ A claim can appear credible while still being problematic because:
 - evidence is presented without sufficient provenance;
 - multiple pieces of evidence are combined in a way that creates an
   unsupported conclusion.
+- an authentic source is presented in a way that materially misrepresents what
+  it establishes;
 
 These problems are particularly significant when information is generated,
 summarized, transformed, or communicated by automated systems.
@@ -49,8 +51,9 @@ evidence, provenance, and context.
 
 ## 3. The Core Idea
 
-ECRA treats a claim and its supporting evidence as explicit objects of
-evaluation.
+ECRA treats claims and their associated evidence as explicit objects of
+evaluation. Evidence may support, contradict, qualify, or fail to establish
+a claim.
 
 Conceptually:
 
