@@ -4,43 +4,64 @@
 
 This repository contains the **ECRA Generation 1 reference implementation**.
 
-These instructions define how AI coding agents and automated development assistants must operate within the repository.
+These instructions define the operating rules for AI coding agents, including:
 
-The repository is intended to support implementation by:
+- OpenAI Codex;
+- Claude Code;
+- other compatible AI coding agents;
+- human developers working with AI assistance.
 
-- OpenAI Codex
-- Claude Code
-- other compatible AI coding agents
-- human developers working manually or collaboratively with AI agents
+The repository is intended to be **self-contained**. An implementation agent must be able to understand and implement ECRA from the repository without depending on historical chat conversations.
 
-The repository is designed to be **self-contained**. An implementation agent must not require access to previous ChatGPT conversations to understand or implement the project correctly.
+This file provides the repository-level agent rules. Detailed requirements, architecture, design, implementation, and verification rules belong in the appropriate documents under `docs/`.
 
 ---
 
-## 2. Current Objective
+## 2. Current Project State
+
+The repository is being bootstrapped from the established **ECRA Generation 1 specification baseline**.
+
+The current work proceeds in two stages:
+
+1. establish and approve the canonical Gen1 requirements, architecture, design, and implementation documentation in this repository;
+2. implement and verify the Gen1 reference implementation.
+
+Until the applicable Gen1 specification baseline has been established in the repository:
+
+- do not invent missing requirements;
+- do not invent architecture;
+- do not begin substantive production implementation;
+- do not use implementation convenience to resolve specification ambiguity;
+- use only explicitly approved project material when resolving missing context.
+
+Production implementation begins only when the relevant specification and design baseline is available in the repository.
+
+---
+
+## 3. Current Objective
 
 The current objective is:
 
-> Build a production-quality, tested, observable, maintainable **ECRA Generation 1 reference implementation** that conforms to the approved Gen1 requirements, architecture, design decisions, and implementation contracts.
+> Build a production-quality, tested, observable, maintainable **ECRA Generation 1 reference implementation** that conforms to the approved Gen1 requirements, architecture, design decisions, contracts, and verification criteria.
 
 Generation 1 is the current implementation boundary.
 
-Do not expand the scope beyond Generation 1 unless an explicit approved change requires it.
+Do not expand the scope beyond Gen1 unless an explicit approved change promotes additional work into the current scope.
 
 ---
 
-## 3. Generation 1 Is Frozen
+## 4. Generation 1 Architecture Is Frozen
 
-The Generation 1 architecture has been established and is considered frozen.
+The approved Generation 1 architecture is frozen for implementation.
 
 Agents must:
 
-- implement the existing architecture;
-- preserve established architectural boundaries;
+- implement the established architecture;
+- preserve approved architectural boundaries;
 - preserve approved interfaces and contracts;
 - preserve approved domain semantics;
 - follow approved architectural decisions;
-- avoid introducing alternative architectures merely because they appear simpler or more modern.
+- avoid introducing alternative architectures merely because they appear simpler, newer, or more convenient.
 
 Implementation convenience is not sufficient justification for architectural change.
 
@@ -48,79 +69,158 @@ Implementation convenience is not sufficient justification for architectural cha
 
 If an implementation discovers that an approved Gen1 requirement cannot be satisfied by the current architecture:
 
-1. Stop the affected implementation work.
-2. Identify the exact requirement.
-3. Identify the architectural constraint causing the conflict.
-4. Identify the relevant architecture/design/ADR documents.
-5. Explain the conflict.
-6. Do not silently redesign the architecture.
-7. Do not encode a workaround that violates the specification merely to make the implementation compile.
+1. stop the affected implementation work;
+2. identify the exact requirement;
+3. identify the architectural constraint causing the conflict;
+4. identify the relevant architecture, design, and ADR documents;
+5. explain the conflict;
+6. identify possible alternatives if useful;
+7. do not silently redesign the architecture;
+8. do not introduce a workaround that violates the specification.
 
-An architectural change requires an explicit decision and must be recorded through the project's decision process.
+An architectural change requires an explicit decision and must be recorded through the project's decision process before implementation.
 
 ---
 
-## 4. Repository Is the Source of Truth
+## 5. Repository Is the Source of Truth
 
 The canonical project specification is contained in this repository.
 
-Chat conversations, personal notes, temporary discussions, generated suggestions, and historical project discussions are not normative unless their content has been deliberately incorporated into the repository.
+The following are **not normative by themselves**:
 
-When information conflicts, use the repository authority hierarchy defined below.
+- ChatGPT conversations;
+- historical discussions;
+- personal notes;
+- temporary working notes;
+- generated suggestions;
+- comments in external systems;
+- abandoned proposals.
 
-Do not reconstruct requirements from memory when the authoritative repository documents are available.
+Information becomes project authority only when deliberately incorporated into the appropriate repository artifact and given the appropriate status and authority.
+
+Do not reconstruct requirements from memory when authoritative repository documents are available.
 
 ---
 
-## 5. Document Authority Hierarchy
+## 6. Normative Documents
 
-When resolving conflicts, use the following order of authority:
+Repository documents must clearly distinguish **authority** from **status**.
 
-1. **Approved Gen1 requirements**
-2. **Approved Gen1 architecture**
-3. **Approved Architecture Decision Records (ADRs)**
-4. **Approved detailed design specifications**
-5. **Executable contracts, schemas, and test vectors**
-6. **Verification and acceptance criteria**
-7. **Existing implementation**
-8. **Informational documentation**
-9. **Historical material**
-10. **Deferred/future material**
+### Authority
+
+Documents may be classified as:
+
+```text
+NORMATIVE
+IMPLEMENTATION
+INFORMATIONAL
+HISTORICAL
+DEFERRED
+```
+
+### Status
+
+Documents may be classified as:
+
+```text
+DRAFT
+REVIEW
+APPROVED
+SUPERSEDED
+DEPRECATED
+```
+
+Only documents that are explicitly **APPROVED** and have the appropriate authority may govern implementation.
+
+Draft, historical, informational, superseded, deprecated, and deferred material must not be treated as current Gen1 requirements.
+
+The metadata convention for project documents is defined by the documentation structure under `docs/`.
+
+---
+
+## 7. Document Authority Hierarchy
+
+When approved project artifacts conflict, use the following precedence:
+
+1. approved Gen1 requirements;
+2. approved Gen1 architecture;
+3. approved Architecture Decision Records;
+4. approved detailed design specifications;
+5. approved executable contracts, schemas, and test vectors;
+6. approved verification and acceptance criteria;
+7. existing implementation;
+8. informational documentation;
+9. historical material;
+10. deferred/future material.
 
 Higher-authority material takes precedence over lower-authority material.
 
-Existing code does not override a normative requirement merely because the code already exists.
+Existing code does not override an approved requirement merely because the code already exists.
 
-Tests are evidence of intended or required behavior, but tests must themselves remain consistent with the authoritative specification.
-
----
-
-## 6. Required Reading Before Implementation
-
-Before making a substantive implementation change, an agent must inspect the relevant repository context.
-
-At minimum:
-
-1. `README.md`
-2. this `AGENTS.md`
-3. the applicable project scope documents
-4. relevant requirements
-5. relevant architecture documents
-6. applicable ADRs
-7. relevant design documents
-8. relevant contracts/schemas
-9. existing implementation
-10. existing tests
-
-Do not make broad implementation changes based only on a single requirement or source file.
-
-For a narrowly scoped change, read the smallest complete set of authoritative documents necessary to understand the affected behavior.
+Tests are evidence of required or intended behavior, but tests must themselves remain consistent with the authoritative specification.
 
 ---
 
-## 7. Repository Navigation
+## 8. Never Change the Specification to Make Code Pass
 
-The repository is organized by responsibility.
+Agents must never modify a requirement, architecture document, ADR, contract, or approved design merely to make an implementation compile or a test pass.
+
+If implementation conflicts with an approved specification:
+
+1. investigate the implementation first;
+2. determine whether the implementation is incorrect;
+3. determine whether the specification is genuinely incomplete or incorrect;
+4. if the specification is defective, stop and follow the applicable decision/change process.
+
+The preferred behavior is:
+
+```text
+Specification
+    ↓
+Implementation
+    ↓
+Verification
+```
+
+not:
+
+```text
+Implementation
+    ↓
+Failure
+    ↓
+Change specification
+    ↓
+Pass
+```
+
+---
+
+## 9. Required Reading Before Implementation
+
+Before making a substantive implementation change, inspect the smallest complete set of repository context necessary to understand the change.
+
+Depending on the task, this normally includes:
+
+1. `README.md`;
+2. `AGENTS.md`;
+3. applicable project scope documents;
+4. relevant requirements;
+5. relevant architecture documents;
+6. applicable ADRs;
+7. relevant design documents;
+8. relevant contracts or schemas;
+9. existing implementation;
+10. relevant tests;
+11. applicable implementation and verification guidance.
+
+Do not make broad implementation changes based only on a task description or a single source file.
+
+---
+
+## 10. Repository Navigation
+
+The repository is organized by responsibility:
 
 ```text
 docs/
@@ -134,7 +234,7 @@ docs/
     90-deferred/       Future work and explicitly deferred material
 
 specs/
-    contracts/         Machine-readable and precise contracts
+    contracts/         Precise and machine-readable contracts
     schemas/           Schemas
     examples/          Canonical examples
     test-vectors/      Verification inputs and expected results
@@ -152,28 +252,31 @@ deploy/                Deployment and runtime artifacts
 
 scripts/               Development and operational scripts
 
-.github/               CI/CD and GitHub project configuration
+.github/               GitHub and CI/CD configuration
 ```
 
-The exact source-language/package structure is defined by the approved implementation documentation and architecture. Do not invent an alternative source hierarchy without justification.
+The exact source-language and package/module structure is defined by the approved architecture and implementation documentation.
+
+Do not invent an alternative source hierarchy without justification.
 
 ---
 
-## 8. Requirements Before Code
+## 11. Requirements Before Code
 
 Implementation must be requirement-driven.
 
-Before implementing a capability, determine:
+Before implementing a meaningful capability, determine:
 
-- which requirement(s) it satisfies;
+- which requirement it satisfies;
 - which architectural component owns it;
 - which design specification governs it;
 - which contracts apply;
-- which failure behavior is required;
-- which observability behavior is required;
-- how it will be verified.
+- what externally observable behavior is required;
+- what failure behavior is required;
+- what observability behavior is required;
+- how the behavior will be verified.
 
-A useful implementation trace is:
+The desired traceability is:
 
 ```text
 Requirement
@@ -195,34 +298,38 @@ If a meaningful implementation change cannot be associated with an approved requ
 
 ---
 
-## 9. Do Not Invent Requirements
+## 12. Do Not Invent Requirements
 
 Agents must not introduce behavior simply because it appears useful.
 
 Do not independently invent:
 
-- new APIs;
-- new domain concepts;
-- new persistence models;
-- new configuration options;
-- new extension points;
-- new plugins;
-- new integration mechanisms;
-- new architectural layers;
-- new infrastructure dependencies;
-- new product features.
+- APIs;
+- domain concepts;
+- persistence models;
+- configuration options;
+- extension points;
+- plugins;
+- integration mechanisms;
+- architectural layers;
+- infrastructure dependencies;
+- product features.
 
-If behavior is genuinely unspecified and necessary to proceed, identify the ambiguity and request or record a decision rather than silently choosing behavior that could become de facto architecture.
+When behavior is genuinely unspecified and materially affects implementation, identify the ambiguity and stop for clarification or an explicit project decision.
 
-Reasonable local implementation choices are allowed when they do not alter an approved contract, architectural boundary, or externally observable requirement.
+A local implementation choice is acceptable when it:
+
+- does not change an approved contract;
+- does not change an architectural boundary;
+- does not change externally observable behavior;
+- does not introduce a new requirement;
+- does not create future architectural constraints.
 
 ---
 
-## 10. Scope Control
+## 13. Scope Control
 
-Generation 1 has a deliberately bounded scope.
-
-Work belongs to one of these categories:
+Generation 1 work belongs to one of three categories:
 
 ```text
 GEN1-IMPLEMENT
@@ -232,35 +339,41 @@ FUTURE
 
 ### GEN1-IMPLEMENT
 
-Required work needed to implement the approved Generation 1 system.
+Work required to implement the approved Generation 1 system.
 
 ### GEN1-FIX
 
-Defects that prevent the implementation from conforming to Gen1 requirements, architecture, design, contracts, or production-quality criteria.
+Defects preventing conformance to Gen1 requirements, architecture, design, contracts, or production-quality criteria.
 
 ### FUTURE
 
-Useful ideas that are not required for Gen1.
+Useful work that is not required for Gen1.
 
 Future work must not be pulled into the current implementation merely because it appears beneficial.
 
-Material that belongs to future generations or later initiatives should remain under:
+Future and explicitly deferred material belongs under:
 
 ```text
 docs/90-deferred/
 ```
 
-unless explicitly promoted into Gen1.
+unless it is formally promoted into Gen1.
 
 ---
 
-## 11. Vertical Slice First
+## 14. Vertical Slice First
 
-The implementation begins with the approved Gen1 vertical slice.
+Gen1 implementation begins with the approved vertical slice.
 
-The vertical slice must demonstrate the real architectural execution path rather than a disconnected prototype.
+The vertical slice must exercise the actual Gen1 architecture rather than becoming a disconnected prototype or replacement architecture.
 
-The implementation sequence should generally be:
+The implementation sequence is governed by:
+
+```text
+docs/50-implementation/vertical-slice.md
+```
+
+The general objective is:
 
 ```text
 Foundation
@@ -271,7 +384,7 @@ Application behavior
     ↓
 Runtime execution
     ↓
-Persistence / required infrastructure
+Required persistence / infrastructure
     ↓
 Observability
     ↓
@@ -280,19 +393,13 @@ API / integration boundary
 End-to-end verification
 ```
 
-The exact sequence is governed by:
-
-```text
-docs/50-implementation/vertical-slice.md
-```
-
-Do not replace the approved vertical slice with a simplified architecture solely to obtain an earlier demo.
+Do not replace the approved vertical slice with a simplified implementation merely to obtain an earlier demonstration.
 
 ---
 
-## 12. Implementation Quality
+## 15. Implementation Principles
 
-Production code must prioritize:
+Production implementation must prioritize:
 
 1. correctness;
 2. specification conformance;
@@ -305,17 +412,24 @@ Production code must prioritize:
 9. appropriate performance;
 10. simplicity.
 
-Avoid unnecessary abstraction.
+Implement the **smallest complete change** that satisfies the approved requirements and design.
 
-Do not introduce abstractions merely because they might be useful in a hypothetical future version.
+Avoid:
 
-Prefer a small, explicit implementation over a generalized framework when both satisfy the approved design.
+- speculative abstractions;
+- unnecessary frameworks;
+- premature optimization;
+- unrelated refactoring;
+- architectural generalization;
+- infrastructure added for hypothetical future needs.
+
+Prefer explicit, understandable implementation over unnecessary indirection.
 
 ---
 
-## 13. Architectural Boundaries
+## 16. Architectural Boundaries
 
-Respect the responsibilities and dependencies defined by the architecture.
+Respect the responsibilities and dependencies defined by the approved architecture.
 
 Do not:
 
@@ -325,20 +439,20 @@ Do not:
 - leak infrastructure concerns into domain logic without authorization;
 - expose internal persistence structures as public contracts;
 - bypass application/runtime orchestration;
-- duplicate business rules in multiple architectural layers.
+- duplicate business rules across architectural layers.
 
-If an architectural boundary appears inconvenient, verify the architecture and design documents before changing the implementation.
+If an architectural boundary appears inconvenient, inspect the applicable architecture and design documents before changing the implementation.
 
 ---
 
-## 14. Contracts Are Deliberate
+## 17. Contracts Are Deliberate
 
-Public and cross-component contracts must be treated as stable design artifacts.
+Treat public and cross-component contracts as controlled design artifacts.
 
 Do not casually change:
 
-- API structures;
-- request/response models;
+- APIs;
+- request/response structures;
 - error contracts;
 - domain contracts;
 - persistence contracts;
@@ -346,70 +460,43 @@ Do not casually change:
 - event/message contracts;
 - configuration contracts.
 
-If a contract change is genuinely required, determine whether it is:
+Before changing a contract, determine whether the change represents:
 
 - an implementation defect;
 - a missing requirement;
 - a design clarification;
-- an architectural decision.
+- an approved architectural decision.
 
-Do not silently change a contract to make an implementation easier.
-
----
-
-## 15. Error Handling
-
-Failure behavior is part of the system contract.
-
-For each meaningful failure path, consider:
-
-- validation failure;
-- domain failure;
-- application failure;
-- infrastructure failure;
-- persistence failure;
-- configuration failure;
-- external dependency failure;
-- unexpected failure.
-
-Errors must be:
-
-- deterministic where possible;
-- appropriately classified;
-- observable;
-- testable;
-- propagated according to the approved error model.
-
-Do not hide failures merely to make a test or execution path succeed.
-
-Do not expose internal implementation details through public error contracts unless explicitly required.
+Do not change contracts merely to make implementation easier.
 
 ---
 
-## 16. Observability
+## 18. Local Implementation Decisions vs Material Decisions
 
-Observability is part of the implementation, not an optional post-processing step.
+Agents may make local implementation decisions when they do not materially affect the system contract.
 
-Where required by the architecture and observability specification, implementation must provide appropriate:
+Agents must stop and request a decision when a change affects:
 
-- metrics;
-- structured logs;
-- correlation/context information;
-- health information;
-- diagnostic information;
-- tracing signals.
+- domain semantics;
+- public APIs;
+- persistence semantics;
+- architectural boundaries;
+- security behavior;
+- lifecycle semantics;
+- externally observable behavior;
+- cross-component contracts;
+- required infrastructure;
+- major operational behavior.
 
-Do not add arbitrary telemetry that creates unnecessary operational complexity.
-
-Follow the canonical observability design.
+When uncertain whether a decision is material, treat it as material.
 
 ---
 
-## 17. Testing Requirements
+## 19. Testing and Verification
 
-Production behavior must be accompanied by appropriate tests.
+Production behavior must be supported by appropriate automated verification.
 
-Use the test layers defined by:
+Follow:
 
 ```text
 docs/50-implementation/testing-strategy.md
@@ -421,12 +508,14 @@ and:
 docs/60-verification/
 ```
 
-Tests should cover, as applicable:
+A meaningful capability is not considered implemented merely because source code exists.
+
+The applicable verification should establish, as appropriate:
 
 - normal behavior;
-- boundary conditions;
+- boundary behavior;
 - invalid input;
-- failure paths;
+- failure behavior;
 - state transitions;
 - contract behavior;
 - integration behavior;
@@ -436,47 +525,47 @@ Tests should cover, as applicable:
 
 Do not weaken production behavior merely to simplify tests.
 
-Do not delete or weaken a test to make an implementation pass unless the test itself is demonstrably incorrect according to the authoritative specification.
+Do not delete or weaken a valid test merely to make an implementation pass.
 
 ---
 
-## 18. Test Evidence
+## 20. Observability, Security, and Configuration
 
-A requirement is not considered implemented merely because the code exists.
+Observability, security, and configuration are implementation concerns governed by the approved architecture and design.
 
-For significant behavior, the implementation should eventually provide traceability:
-
-```text
-Requirement ID
-    ↓
-Implementation component
-    ↓
-Test
-    ↓
-Verification result
-```
-
-Use:
+Follow the applicable documents under:
 
 ```text
-docs/10-requirements/requirements-traceability.md
+docs/20-architecture/
+docs/30-design/
+docs/50-implementation/
 ```
 
-for the canonical traceability model.
+Do not:
+
+- add undocumented configuration;
+- introduce hidden runtime switches;
+- disable required security controls for convenience;
+- commit credentials or secrets;
+- log sensitive information;
+- add arbitrary telemetry;
+- introduce operational dependencies without justification.
+
+Detailed rules belong in the applicable architecture and implementation documents rather than being duplicated here.
 
 ---
 
-## 19. Dependencies
+## 21. Dependencies
 
 Prefer existing project dependencies and platform capabilities when they satisfy the approved design.
 
-Do not introduce a dependency merely because:
+Do not add a dependency merely because:
 
 - it is popular;
 - an AI-generated solution commonly uses it;
 - it makes a small implementation shorter;
 - it is fashionable;
-- it may be useful in a future version.
+- it might be useful in a future generation.
 
 Before adding a dependency, consider:
 
@@ -487,50 +576,7 @@ Before adding a dependency, consider:
 - operational impact;
 - transitive dependencies;
 - testability;
-- whether the dependency is actually required.
-
----
-
-## 20. Configuration
-
-Configuration must follow the approved configuration model.
-
-Do not introduce undocumented configuration switches.
-
-Configuration should be:
-
-- explicit;
-- validated;
-- observable where appropriate;
-- safely defaulted where defaults are permitted;
-- documented.
-
-Do not use environment variables or configuration values as hidden mechanisms for changing architectural behavior.
-
----
-
-## 21. Security
-
-Security requirements are mandatory requirements, not optional hardening work.
-
-Follow:
-
-```text
-docs/20-architecture/security.md
-```
-
-and the relevant requirements/design documents.
-
-Do not:
-
-- disable security controls merely to simplify development;
-- commit credentials or secrets;
-- add insecure defaults;
-- bypass authentication/authorization where required;
-- log sensitive information;
-- introduce unsafe diagnostic behavior.
-
-Development-only shortcuts must never silently become production defaults.
+- whether it is actually required.
 
 ---
 
@@ -542,173 +588,151 @@ When implementing a task:
 - avoid unrelated refactoring;
 - avoid opportunistic architecture changes;
 - avoid mass formatting changes;
-- avoid renaming unrelated components;
-- avoid introducing speculative infrastructure.
+- avoid unrelated renaming;
+- avoid speculative infrastructure.
 
 A small task should produce a small, understandable change.
 
-If implementation reveals unrelated technical debt, record it separately rather than expanding the current task unless it blocks correctness.
+If unrelated technical debt is discovered, record it separately unless it blocks correctness or verification of the current task.
 
 ---
 
 ## 23. Preserve Existing Correct Behavior
 
-Before modifying existing code:
+Before modifying existing implementation:
 
 1. understand why it exists;
 2. identify the requirement or design governing it;
 3. inspect relevant tests;
 4. determine whether it is correct;
-5. change it only when the specification or defect requires the change.
+5. change it only when the specification or a verified defect requires the change.
 
-Do not rewrite working code simply to match an agent's preferred style.
+Do not rewrite working implementation merely to match an agent's preferred style.
 
 ---
 
-## 24. Build and Test Before Completion
+## 24. Architecture Change Protocol
 
-A substantive implementation change is not complete until the applicable:
+Architecture changes are exceptional during Gen1 implementation.
 
-- build;
-- static checks;
+Before proposing an architecture change, establish:
+
+1. the exact Gen1 requirement involved;
+2. why the current architecture cannot satisfy it;
+3. why the problem cannot be solved within the current design;
+4. alternatives considered;
+5. the smallest viable architectural change;
+6. consequences for implementation and tests;
+7. affected documents.
+
+Do not implement an architectural change until it has been explicitly approved and recorded through the appropriate ADR/design process.
+
+---
+
+## 25. Documentation Changes
+
+Normative requirements, architecture, contracts, and approved design must not be changed merely to match an incorrect implementation.
+
+When implementation exposes a genuine specification problem:
+
+1. identify the problem;
+2. stop the affected implementation;
+3. follow the applicable decision/change process;
+4. update the authoritative documentation only after approval;
+5. update implementation and verification accordingly.
+
+Implementation guidance may evolve without changing architecture or requirements, provided the change remains consistent with the authoritative specification.
+
+---
+
+## 26. Agent Instruction Hierarchy
+
+Instruction sources have the following relationship:
+
+```text
+Repository requirements / architecture / approved design
+                    ↓
+             AGENTS.md
+                    ↓
+       Agent-specific instructions
+                    ↓
+       Task-specific implementation
+```
+
+Agent-specific instructions may refine operational workflow but must not override:
+
+- approved requirements;
+- approved architecture;
+- approved contracts;
+- approved ADRs;
+- approved security constraints;
+- approved verification criteria.
+
+`AGENTS.md` is itself a repository control document.
+
+Agents must not modify `AGENTS.md` as part of ordinary implementation work.
+
+Changes to `AGENTS.md` must be intentional, narrowly scoped, and reviewed because they alter the operating rules for future agents.
+
+---
+
+## 27. Repository Hygiene
+
+Do not commit:
+
+- credentials or secrets;
+- local environment files containing secrets;
+- build output;
+- temporary files;
+- debug dumps;
+- abandoned prototypes;
+- IDE-specific artifacts unless intentionally tracked;
+- generated artifacts unless explicitly required.
+
+Keep implementation branches and commits focused on the task being performed.
+
+---
+
+## 28. Build and Verification Before Completion
+
+A substantive implementation change is not complete until the applicable verification has been executed.
+
+Depending on the change, this may include:
+
+- formatting;
+- static analysis;
+- compilation/build;
 - unit tests;
 - component tests;
 - integration tests;
 - contract tests;
-- end-to-end tests
+- end-to-end tests.
 
-have been executed, or a documented reason explains why a particular verification step cannot yet run.
+If a verification step cannot yet be executed, document why.
 
-Report failures accurately.
-
-Never claim that an implementation is verified when the relevant verification has not actually been performed.
+Never claim verification that was not actually performed.
 
 ---
 
-## 25. Repository Hygiene
-
-Do not commit:
-
-- generated temporary files;
-- credentials;
-- local environment files containing secrets;
-- IDE-specific artifacts unless intentionally tracked;
-- build output;
-- debug dumps;
-- temporary experiments;
-- abandoned prototypes.
-
-Generated artifacts should be committed only when explicitly required by the repository design.
-
----
-
-## 26. Documentation Changes
-
-When implementation changes a documented behavior, update the relevant documentation when the change is authoritative and approved.
-
-Do not modify normative architecture or requirements merely to make them match an implementation that was incorrectly written.
-
-The preferred sequence is:
-
-```text
-Specification
-    ↓
-Implementation
-    ↓
-Verification
-    ↓
-Documentation alignment
-```
-
-If the specification itself is wrong or incomplete, stop and handle that as a specification/design decision rather than silently rewriting it.
-
----
-
-## 27. Architecture Change Protocol
-
-An architecture change is exceptional during Gen1 implementation.
-
-Before proposing one, establish:
-
-1. The exact Gen1 requirement involved.
-2. Why the existing architecture cannot satisfy it.
-3. Why the issue cannot be resolved within the current design.
-4. What alternatives were considered.
-5. The smallest architectural change that would resolve the issue.
-6. The consequences for existing implementation and tests.
-7. The affected documents.
-
-Do not implement the architectural change until it has been explicitly approved and recorded in the appropriate ADR/design documents.
-
----
-
-## 28. Deferred Work
-
-Future ideas must not silently enter the Gen1 implementation.
-
-Use:
-
-```text
-docs/90-deferred/
-```
-
-for:
-
-- future generations;
-- speculative improvements;
-- optional integrations;
-- broader ecosystem capabilities;
-- long-term product ideas;
-- architectural extensions not required by Gen1.
-
-A future idea may be recorded without being implemented.
-
----
-
-## 29. Completion Criteria
-
-A capability is considered complete only when it satisfies the applicable Definition of Done.
-
-At minimum:
-
-- required behavior is implemented;
-- contracts are correct;
-- failure behavior is implemented;
-- tests are present and passing;
-- integration behavior is verified where applicable;
-- observability requirements are satisfied;
-- security requirements are satisfied;
-- documentation is aligned;
-- no known Gen1 specification violation remains.
-
-The authoritative completion criteria are defined under:
-
-```text
-docs/60-verification/
-```
-
----
-
-## 30. When to Stop
+## 29. When to Stop
 
 An agent must stop and request clarification or a project decision when:
 
 - requirements conflict;
 - architecture conflicts with requirements;
-- two normative documents conflict;
-- required behavior is genuinely unspecified;
-- an implementation requires an architectural change;
+- two approved normative documents conflict;
+- required behavior is materially unspecified;
+- implementation requires an architectural change;
 - a security-sensitive decision is ambiguous;
 - a public contract requires an unapproved change;
-- the requested work appears outside Gen1 scope.
+- the requested work appears outside Gen1 scope;
+- a local implementation decision would create significant future constraints.
 
 Do not resolve material ambiguity by guessing.
 
-A clearly documented, local implementation choice is acceptable only when it does not materially affect requirements, architecture, contracts, or externally observable behavior.
-
 ---
 
-## 31. Preferred Implementation Workflow
+## 30. Preferred Implementation Workflow
 
 For a normal implementation task:
 
@@ -720,30 +744,30 @@ For a normal implementation task:
 5. Read the relevant design.
 6. Inspect the existing implementation.
 7. Inspect relevant tests.
-8. Identify the smallest implementation change.
+8. Identify the smallest complete implementation change.
 9. Implement it.
-10. Add/update tests.
+10. Add or update tests.
 11. Run applicable verification.
-12. Review the change against the specification.
-13. Update implementation status.
-14. Report what changed and what was verified.
+12. Review the implementation against the specification.
+13. Update implementation status where applicable.
+14. Report implementation, verification, and remaining work.
 ```
 
-Do not skip directly from task description to code.
+Do not skip directly from a task description to code.
 
 ---
 
-## 32. Agent Output Expectations
+## 31. Agent Output Expectations
 
 When completing implementation work, report:
 
 ### Implemented
 
-What was changed.
+What changed.
 
 ### Specification
 
-Which requirements/design/architecture documents govern the change.
+Which requirements, architecture, design documents, contracts, or ADRs govern the change.
 
 ### Tests
 
@@ -751,7 +775,7 @@ Which tests were added or modified.
 
 ### Verification
 
-Which build/test/verification commands were executed and their results.
+Which build, test, and verification commands were executed and their results.
 
 ### Remaining
 
@@ -759,16 +783,18 @@ Any unresolved issue, limitation, or blocked work.
 
 ### Scope
 
-Explicitly identify anything discovered that belongs outside the current task or Gen1.
+Any discovered work that belongs outside the current task or Gen1.
 
 ---
 
-## 33. Final Principle
+## 32. Final Principle
 
-The objective is not to produce the largest or most sophisticated implementation.
+The objective is not to produce the largest, most sophisticated, or most generalized implementation.
 
-The objective is to produce the **smallest complete, correct, production-quality implementation that faithfully realizes the approved ECRA Generation 1 architecture and requirements**.
+The objective is to produce the:
+
+> **smallest complete, correct, production-quality implementation that faithfully realizes the approved ECRA Generation 1 requirements and architecture.**
 
 When in doubt:
 
-> Prefer the specification over assumption, explicit behavior over hidden behavior, evidence over claims, and bounded implementation over speculative expansion.
+> **Prefer the specification over assumption, approved design over convenience, explicit behavior over hidden behavior, evidence over claims, and bounded implementation over speculative expansion.**
