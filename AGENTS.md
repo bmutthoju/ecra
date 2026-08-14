@@ -130,7 +130,7 @@ SUPERSEDED
 DEPRECATED
 ```
 
-Only documents that are explicitly **APPROVED** and have the appropriate authority may govern implementation.
+Only documents marked **APPROVED** with **NORMATIVE** or the applicable **IMPLEMENTATION** authority may directly govern implementation.
 
 Draft, historical, informational, superseded, deprecated, and deferred material must not be treated as current Gen1 requirements.
 
@@ -261,7 +261,31 @@ Do not invent an alternative source hierarchy without justification.
 
 ---
 
-## 11. Requirements Before Code
+## 11. Canonical Project Context
+
+For project understanding, use these entry points:
+
+- Project scope: `docs/00-project/`
+
+- Requirements: `docs/10-requirements/`
+
+- Architecture: `docs/20-architecture/`
+
+- Detailed design: `docs/30-design/`
+
+- Architecture decisions: `docs/40-decisions/`
+
+- Implementation: `docs/50-implementation/`
+
+- Verification: `docs/60-verification/`
+
+- Deferred work: `docs/90-deferred/`
+
+When implementing a capability, read only the applicable documents from these areas rather than treating every document as relevant to every task.
+
+---
+
+## 12. Requirements Before Code
 
 Implementation must be requirement-driven.
 
@@ -298,7 +322,7 @@ If a meaningful implementation change cannot be associated with an approved requ
 
 ---
 
-## 12. Do Not Invent Requirements
+## 13. Do Not Invent Requirements
 
 Agents must not introduce behavior simply because it appears useful.
 
@@ -327,7 +351,7 @@ A local implementation choice is acceptable when it:
 
 ---
 
-## 13. Scope Control
+## 14. Scope Control
 
 Generation 1 work belongs to one of three categories:
 
@@ -361,7 +385,7 @@ unless it is formally promoted into Gen1.
 
 ---
 
-## 14. Vertical Slice First
+## 15. Vertical Slice First
 
 Gen1 implementation begins with the approved vertical slice.
 
@@ -397,7 +421,7 @@ Do not replace the approved vertical slice with a simplified implementation mere
 
 ---
 
-## 15. Implementation Principles
+## 16. Implementation Principles
 
 Production implementation must prioritize:
 
@@ -427,7 +451,7 @@ Prefer explicit, understandable implementation over unnecessary indirection.
 
 ---
 
-## 16. Architectural Boundaries
+## 17. Architectural Boundaries
 
 Respect the responsibilities and dependencies defined by the approved architecture.
 
@@ -445,7 +469,7 @@ If an architectural boundary appears inconvenient, inspect the applicable archit
 
 ---
 
-## 17. Contracts Are Deliberate
+## 18. Contracts Are Deliberate
 
 Treat public and cross-component contracts as controlled design artifacts.
 
@@ -471,7 +495,7 @@ Do not change contracts merely to make implementation easier.
 
 ---
 
-## 18. Local Implementation Decisions vs Material Decisions
+## 19. Local Implementation Decisions vs Material Decisions
 
 Agents may make local implementation decisions when they do not materially affect the system contract.
 
@@ -492,7 +516,7 @@ When uncertain whether a decision is material, treat it as material.
 
 ---
 
-## 19. Testing and Verification
+## 20. Testing and Verification
 
 Production behavior must be supported by appropriate automated verification.
 
@@ -529,7 +553,7 @@ Do not delete or weaken a valid test merely to make an implementation pass.
 
 ---
 
-## 20. Observability, Security, and Configuration
+## 21. Observability, Security, and Configuration
 
 Observability, security, and configuration are implementation concerns governed by the approved architecture and design.
 
@@ -555,7 +579,7 @@ Detailed rules belong in the applicable architecture and implementation document
 
 ---
 
-## 21. Dependencies
+## 22. Dependencies
 
 Prefer existing project dependencies and platform capabilities when they satisfy the approved design.
 
@@ -580,7 +604,7 @@ Before adding a dependency, consider:
 
 ---
 
-## 22. Changes Must Be Narrowly Scoped
+## 23. Changes Must Be Narrowly Scoped
 
 When implementing a task:
 
@@ -597,7 +621,7 @@ If unrelated technical debt is discovered, record it separately unless it blocks
 
 ---
 
-## 23. Preserve Existing Correct Behavior
+## 24. Preserve Existing Correct Behavior
 
 Before modifying existing implementation:
 
@@ -611,7 +635,7 @@ Do not rewrite working implementation merely to match an agent's preferred style
 
 ---
 
-## 24. Architecture Change Protocol
+## 25. Architecture Change Protocol
 
 Architecture changes are exceptional during Gen1 implementation.
 
@@ -629,7 +653,7 @@ Do not implement an architectural change until it has been explicitly approved a
 
 ---
 
-## 25. Documentation Changes
+## 26. Documentation Changes
 
 Normative requirements, architecture, contracts, and approved design must not be changed merely to match an incorrect implementation.
 
@@ -645,7 +669,7 @@ Implementation guidance may evolve without changing architecture or requirements
 
 ---
 
-## 26. Agent Instruction Hierarchy
+## 27. Agent Instruction Hierarchy
 
 Instruction sources have the following relationship:
 
@@ -676,7 +700,7 @@ Changes to `AGENTS.md` must be intentional, narrowly scoped, and reviewed becaus
 
 ---
 
-## 27. Repository Hygiene
+## 28. Repository Hygiene
 
 Do not commit:
 
@@ -693,7 +717,7 @@ Keep implementation branches and commits focused on the task being performed.
 
 ---
 
-## 28. Build and Verification Before Completion
+## 29. Build and Verification Before Completion
 
 A substantive implementation change is not complete until the applicable verification has been executed.
 
@@ -714,7 +738,7 @@ Never claim verification that was not actually performed.
 
 ---
 
-## 29. When to Stop
+## 30. When to Stop
 
 An agent must stop and request clarification or a project decision when:
 
@@ -732,7 +756,7 @@ Do not resolve material ambiguity by guessing.
 
 ---
 
-## 30. Preferred Implementation Workflow
+## 31. Preferred Implementation Workflow
 
 For a normal implementation task:
 
@@ -757,7 +781,7 @@ Do not skip directly from a task description to code.
 
 ---
 
-## 31. Agent Output Expectations
+## 32. Agent Output Expectations
 
 When completing implementation work, report:
 
@@ -787,7 +811,7 @@ Any discovered work that belongs outside the current task or Gen1.
 
 ---
 
-## 32. Final Principle
+## 33. Final Principle
 
 The objective is not to produce the largest, most sophisticated, or most generalized implementation.
 
