@@ -15,8 +15,9 @@ importantly, what it is explicitly not intended to accomplish.
 The purpose is to provide a stable scope boundary for architecture,
 implementation, verification, and AI-assisted development.
 
-A capability that is not required by the goals defined here must not be added
-to Generation 1 merely because it appears useful or desirable.
+A capability that is not required by an approved Gen1 requirement and is not
+necessary to implement an approved Gen1 requirement must not be added to
+Generation 1 merely because it appears useful or desirable.
 
 ---
 
@@ -220,9 +221,12 @@ situations where human judgment is necessary.
 However, human judgment should itself be evidence-based, transparent, and
 traceable wherever practical.
 
-ECRA should support a decision process in which the evidence considered,
-relevant sources and context, evaluation basis, and resulting judgment can be
-understood by others.
+ECRA should, where applicable, support decision processes in which the
+evidence considered, relevant sources and context, evaluation basis, and
+resulting judgment can be understood by others.
+
+The exact mechanisms by which human judgments are captured, represented, or
+audited are defined by the approved Gen1 requirements and design.
 
 This transparency is important not only for establishing confidence in a
 decision, but also for identifying, reviewing, and learning from human errors
@@ -270,6 +274,11 @@ authority as an unexplained property of the source.
 
 Authority is therefore contextual and attributable rather than an inherent
 property assigned universally by ECRA.
+
+An authority claim represented by ECRA is itself information to be evaluated
+or reported according to the applicable Gen1 requirements; it is not
+automatically accepted as true merely because it has an identified
+attribution.
 
 ---
 
