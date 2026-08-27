@@ -1,6 +1,6 @@
 # ECRA — Terminology
 
-> Status: DRAFT
+> Status: APPROVED
 > Authority: NORMATIVE
 > Generation: GEN1
 
