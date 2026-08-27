@@ -67,20 +67,18 @@ Evidence must be evaluated according to the applicable Gen1 requirements.
 
 ## 5. Source
 
-A **source** is an identifiable origin to which information or source material
-is attributed.
+A **source** is an identifiable origin, publication, repository, provider, or
+other entity from which information or source material is obtained or to which
+it is attributed.
 
 A source may be, for example:
 
-- a document;
-- publication;
-- record;
-- dataset;
-- statement;
-- institution;
-- individual;
-- digital resource; or
-- other identifiable origin of information.
+- a document or publication;
+- a record or dataset;
+- a statement or communication;
+- a repository or digital resource;
+- an institution or individual;
+- or another identifiable origin of information.
 
 A source and the information obtained from or attributed to that source are
 distinct concepts.
@@ -160,7 +158,7 @@ An integrity reference may include mechanisms such as:
 
 - a cryptographic hash;
 - a digital signature;
-- a trusted archival record; or
+- an independently maintained archival record; or
 - another appropriate integrity mechanism.
 
 Artifact integrity establishes that the acquired representation has not
@@ -177,17 +175,23 @@ authentic, original, authoritative, complete, or truthful.
 representation of source material is genuine and corresponds to what it
 purports to represent.
 
+Authenticity does not necessarily mean that an acquired artifact is the
+original physical or digital artifact. An authentic representation may be a
+faithful copy, reproduction, transcription, or other representation of an
+original source.
+
 Authenticity is distinct from:
 
 - artifact integrity;
+- originality;
 - authority;
 - relevance;
 - accuracy;
 - reliability; and
 - evidentiary support.
 
-Obtaining an artifact does not, by itself, establish its authenticity or
-originality.
+Obtaining an artifact does not, by itself, establish its authenticity,
+originality, or completeness.
 
 Authenticity should therefore be established, where possible, using
 appropriate evidence and provenance rather than being inferred solely from
@@ -450,10 +454,10 @@ an important aspect of ECRA's traceability and accountability model.
 
 ---
 
-## 24. Normative Terms
+## 24. Normative Language
 
-Unless a document explicitly states otherwise, the following terms have their
-usual standards-oriented meanings:
+Unless a document explicitly defines otherwise, the following terms are
+used as normative language conventions throughout the ECRA specification:
 
 - **MUST / SHALL** — mandatory requirement.
 - **MUST NOT / SHALL NOT** — prohibited behavior.
