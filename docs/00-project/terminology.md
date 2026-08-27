@@ -204,9 +204,9 @@ explicit rather than being represented as established fact.
 
 ## 10. Source Authority
 
-**Source authority** is the degree or basis to which a source is recognized,
-designated, or regarded as authoritative or suitable for a particular purpose,
-domain, or context.
+**Source authority** is the basis on which a source is recognized, designated,
+or regarded as authoritative or suitable for a particular purpose, domain, or
+context.
 
 Authority is not an inherent universal property assigned by ECRA.
 
@@ -266,18 +266,8 @@ requirements and design.
 **Provenance** is information describing the origin, history, derivation, or
 transformation of an information object.
 
-For ECRA, provenance may establish relationships such as:
-
-    Claim
-      |
-      v
-    Evidence
-      |
-      v
-    Source
-      |
-      v
-    Source Material
+For ECRA, provenance may establish relationships among claims, evidence,
+source material, acquired artifacts, sources, context, and transformations.
 
 It may also record transformations or interpretations applied to information.
 
