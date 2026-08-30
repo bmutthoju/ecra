@@ -84,11 +84,14 @@ ECRA-G1-FUN-0001
 ECRA-G1-SEM-0001
 ECRA-G1-INT-0001
 ECRA-G1-EVL-0001
+ECRA-G1-TRC-0001
 ECRA-G1-OPS-0001
 ECRA-G1-VRF-0001
 ```
 
-The identifier is an identity, not a version number and not a lifecycle state.
+The identifier identifies the logical requirement. It MUST NOT encode version or lifecycle state.
+
+The `NNNN` component provides 10,000 values per domain (`0000` through `9999`). This capacity is considered sufficient for the initial Gen1 planning horizon. If a domain approaches exhaustion, the identifier scheme shall be revised through an explicit approved decision; identifiers already allocated shall remain stable and shall not be renumbered.
 
 ### 5.2 Domain Codes
 
@@ -96,14 +99,17 @@ The initial domain vocabulary is:
 
 | Code | Domain | Purpose |
 |---|---|---|
-| `FUN` | Functional | Required system capabilities and behaviors |
-| `SEM` | Semantic | Semantic representation, identity, relationships, and constraints |
-| `INT` | Integrity | Evidence, source, provenance, and contextual integrity |
-| `EVL` | Evaluation | Evaluation behavior and evaluation results |
-| `TRC` | Traceability | Gen1 engineering traceability obligations |
-| `OPS` | Operations | Persistence, observability, security, reliability, and operational behavior |
-| `VRF` | Verification | Verification, conformance, reproducibility, and acceptance obligations |
-|
+| `FUN` | Functional | Required system capabilities and end-to-end behaviors |
+| `SEM` | Semantic | Requirements concerning representation, meaning, identity, relationships, and semantic constraints |
+| `INT` | Integrity | Requirements concerning evidence integrity, source authenticity/authority, contextual integrity, provenance integrity, and related trust properties |
+| `EVL` | Evaluation | Requirements concerning evaluation inputs, evaluation processing, and evaluation results |
+| `TRC` | Traceability | Requirements concerning end-to-end traceability of the system or service capabilities being implemented, including relationships to requirements, architecture, implementation, verification, and evidence |
+| `OPS` | Operations | Requirements concerning persistence, observability, security, reliability, recoverability, and other operational properties |
+| `VRF` | Verification | Requirements concerning verification, conformance, reproducibility, acceptance, and verification evidence |
+
+`SEM` and `INT` are intentionally distinct. `SEM` concerns the meaning and structure of information. `INT` concerns the trustworthiness and integrity of information, sources, evidence, context, and provenance. A requirement may use both domains when it has materially distinct obligations in each area.
+
+A vertical-slice requirement may span multiple implementation layers and may therefore require traceability and verification in addition to its primary functional domain. Domain classification identifies the requirement's primary obligation; it does not limit the requirement's end-to-end implementation or traceability.
 
 Additional domain codes require an explicit approved decision when they introduce a materially distinct requirements domain.
 
@@ -138,7 +144,9 @@ ECRA-G1-FUN-0001@1.1
 ECRA-G1-FUN-0001@2.0
 ```
 
-The exact versioning policy is governed by the applicable ECRA-0000 versioning rules and shall not be duplicated here.
+The version identifier is a representation of the revision lineage; it is not part of the logical requirement identifier.
+
+The exact project versioning policy remains governed by the applicable ECRA-0000 rules. This document establishes only the requirement-level distinction between stable identity and revision lineage.
 
 A version MUST preserve its relationship to its predecessor and successor where applicable.
 
@@ -174,6 +182,8 @@ A requirement SHOULD avoid embedding implementation technology unless the techno
 
 A requirement MUST NOT silently introduce capabilities excluded by the approved Gen1 scope.
 
+Where a requirement represents an end-to-end capability, the requirement SHOULD be written so that its externally observable outcome and acceptance condition are clear enough to support an end-to-end verification path. Implementation may span multiple components and layers.
+
 ## 9. Requirement Metadata
 
 A Gen1 requirement record SHOULD provide, as applicable:
@@ -184,9 +194,9 @@ version
 classification
 statement
 rationale
+source_basis
 scope
 status
-source_basis
 owner
 applicability
 predecessor
@@ -194,14 +204,43 @@ successor
 dependencies
 constraints
 acceptance_criteria
-verification_reference
 architecture_reference
 implementation_reference
+verification_reference
+traceability_references
 provenance
 baseline
+release
 ```
 
-The metadata model MUST remain compatible with the shared semantic foundation and ECRA-1100.
+The metadata model MUST remain compatible with ECRA-1100 and the approved shared semantic foundation.
+
+The following mapping is the current ECRA-1100 alignment target:
+
+| Gen1 field | ECRA-1100 semantic role |
+|---|---|
+| `id` | Stable requirement identity |
+| `version` | Requirement version / lineage |
+| `classification` | Requirement classification |
+| `statement` | Requirement statement |
+| `rationale` | Rationale / engineering basis |
+| `source_basis` | Requirement provenance / source basis |
+| `scope` | Applicability / scope |
+| `status` | Lifecycle state (representation only; not an unconstrained mutable field) |
+| `owner` | Requirement ownership / responsibility |
+| `applicability` | Applicability conditions |
+| `predecessor` / `successor` | Version and evolution lineage |
+| `dependencies` | Requirement/artifact dependency relationships |
+| `constraints` | Applicable requirement constraints |
+| `acceptance_criteria` | Acceptance / verification basis |
+| `architecture_reference` | Allocation to architecture |
+| `implementation_reference` | Implementation realization |
+| `verification_reference` | Verification linkage |
+| `traceability_references` | Explicit typed traceability relationships |
+| `provenance` | Origin/history/derivation information |
+| `baseline` / `release` | Baseline and release association |
+
+This document intentionally does not duplicate ECRA-1100's complete information model. Where a more authoritative ECRA-1100 concept exists, the Gen1 representation MUST conform to it.
 
 ## 10. Requirement Lifecycle
 
@@ -237,12 +276,14 @@ Requirement
    +-- REFINES -----------> Requirement
    +-- DEPENDS_ON --------> Requirement / Artifact
    +-- CONSTRAINS --------> Artifact / Requirement
-   +-- SUPERSEDES -------> Requirement Version
+   +-- SUPERSEDES -------> Requirement / Requirement Version
 ```
 
 The canonical relationship ontology remains subject to the SSF reconciliation identified during implementation-baseline establishment. Existing ECRA-1100 relationship semantics MUST NOT be silently renamed or redefined as part of implementation.
 
 Traceability is a graph capability. Matrices, reports, and dashboards are derived views and MUST NOT become competing semantic sources.
+
+For Gen1 vertical-slice work, `TRC` expresses the obligation to prove the capability end-to-end; it does not mean that every implementation component must be a traceability component or that traceability must be implemented as a separate user-facing feature.
 
 ## 12. Requirement-to-Architecture Contract
 
@@ -333,6 +374,8 @@ Verifiable Results
 
 The project scope also establishes explicit non-goals, including unrestricted crawling, general-purpose content generation, speculative AI capabilities, ecosystem expansion, and Generation 2 architecture. Requirements MUST NOT be created for these capabilities unless the approved scope is explicitly changed.
 
+Requirements should be organized so that each coherent end-to-end capability can be implemented and verified as a vertical slice wherever practical. A vertical slice is an implementation and verification strategy, not a requirement-domain classification.
+
 ## 19. Relationship to ECRA-1100
 
 This document operationalizes the requirements-modeling portion of ECRA-1100 for the Gen1 reference implementation.
@@ -350,6 +393,6 @@ The following remain intentionally unresolved until the relevant semantic or nor
 - final universal metadata contract;
 - final semantic registry authority;
 - final machine-readable representation contract;
-- exact major/minor versioning semantics under ECRA-0000.
+- exact project-wide versioning semantics under ECRA-0000.
 
 These open items MUST NOT be resolved through implementation convenience.
