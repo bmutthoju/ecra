@@ -1,6 +1,6 @@
 # ECRA — Goals and Non-Goals
 
-> Status: IN REVIEW
+> Status: APPROVED
 > Authority: NORMATIVE
 > Generation: GEN1
 
