@@ -307,7 +307,7 @@ The implementation SHOULD represent the architecture reference by stable identit
 
 Requirements-related assertions and conformance claims SHOULD be traceable to evidence where required by the applicable specification.
 
-ECRA-1100 consumes ECRA evidence semantics; it does not create a competing definition of Evidence.
+ECRA-1100 consumes ECRA evidence semantics; it does not define a competing definition of Evidence.
 
 The implementation SHOULD reference evidence by stable identity and preserve provenance rather than copying evidence content into requirements records.
 
