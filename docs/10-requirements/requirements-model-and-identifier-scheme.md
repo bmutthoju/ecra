@@ -1,6 +1,6 @@
 # ECRA Generation 1 — Requirements Model and Identifier Scheme
 
-> Status: DRAFT
+> Status: APPROVED
 > Authority: IMPLEMENTATION
 > Generation: GEN1
 > Scope: Requirements model and identifier scheme
