@@ -1,6 +1,6 @@
 # ECRA Generation 1 — Claim and Evidence Requirements
 
-> Status: DRAFT
+> Status: APPROVED
 > Authority: IMPLEMENTATION
 > Generation: GEN1
 > Scope: Claim and evidence requirements
