@@ -11,19 +11,25 @@ This document defines the first set of ECRA Generation 1 product requirements fo
 
 It establishes requirements for representing claims, evidence, sources, acquired artifacts, integrity, and provenance. It does not define the complete Gen1 evaluation engine, context model, operational platform, or verification framework.
 
+Concrete real-life examples and usage scenarios are intentionally kept outside this normative requirements document. They should be provided by a separate informative examples/scenarios document when needed.
+
 ## 2. Authority and Scope
 
-The approved Gen1 project scope is the primary product-scope authority. ECRA-1000 provides the architectural foundation; ECRA-1100 provides the requirements and traceability framework; and the applicable approved shared semantic foundation governs genuinely portfolio-wide semantic concepts.
+The [approved Gen1 project vision](../00-project/vision.md) and [approved Gen1 goals and non-goals](../00-project/goals-and-non-goals.md) establish the product scope and objectives. The [approved Gen1 terminology](../00-project/terminology.md) establishes canonical product-domain terminology.
+
+ECRA-1000 provides the architectural foundation; ECRA-1100 provides the requirements and traceability framework; and the applicable approved shared semantic foundation governs genuinely portfolio-wide semantic concepts. These authorities MUST be used rather than redefined locally.
 
 This document operationalizes those authorities for Gen1. It MUST NOT redefine their domain semantics.
 
 The requirements in this document are product/system requirements. ECRA-1100 remains the authority for how these requirements are identified, versioned, traced, baselined, and verified.
 
+The repository follows a document hierarchy in which higher-level documents establish scope, terminology, and governing constraints, while lower-level documents elaborate them. Detailed references should point to the applicable higher-level authority rather than duplicating or redefining it.
+
 ## 3. Requirement Identifier Allocation
 
 The requirements in this document use the identifier scheme established by `requirements-model-and-identifier-scheme.md`.
 
-Initial identifiers are allocated in the `FUN`, `INT`, and `SEM` domains according to the primary obligation of each requirement.
+Initial identifiers are allocated in the `FUN`, `INT`, `SEM`, and `TRC` domains according to the primary obligation of each requirement. The domain identifies the requirement's primary obligation; it does not imply exclusive semantic ownership of every concept mentioned by the requirement.
 
 ## 4. Claim Requirements
 
@@ -31,11 +37,13 @@ Initial identifiers are allocated in the `FUN`, `INT`, and `SEM` domains accordi
 
 The system MUST represent a claim as a uniquely identifiable proposition that can be submitted for evaluation.
 
-**Rationale:** Claim is the primary subject of Gen1 evaluation.
+**Rationale:** A claim is the primary subject of Gen1 evaluation.
 
-**Source basis:** Approved Gen1 project terminology and vision.
+**Source basis:** [Approved Gen1 terminology](../00-project/terminology.md), [approved Gen1 vision](../00-project/vision.md).
 
-**Verification:** Contract and integration verification MUST demonstrate creation, retrieval, and evaluation submission of an identifiable claim.
+**Verification criteria:** Demonstrate that an identifiable claim can be represented, retrieved, and submitted to the Gen1 evaluation path.
+
+**Verification method:** Contract and integration verification.
 
 ### ECRA-G1-FUN-0002 — Claim evaluation eligibility
 
@@ -43,9 +51,11 @@ The system MUST be able to determine whether a represented claim has the minimum
 
 **Rationale:** The evaluation path must reject structurally incomplete inputs deterministically rather than treating missing information as successful evaluation input.
 
-**Source basis:** Approved Gen1 scope; Claim and Evidence domain.
+**Source basis:** [Approved Gen1 goals and non-goals](../00-project/goals-and-non-goals.md); approved Claim and Evidence domain scope.
 
-**Verification:** Boundary-condition tests MUST demonstrate deterministic acceptance and rejection of representative claim inputs.
+**Verification criteria:** Demonstrate deterministic acceptance and rejection of representative claim inputs at the evaluation boundary.
+
+**Verification method:** Boundary-condition verification.
 
 ### ECRA-G1-SEM-0001 — Claim identity
 
@@ -53,9 +63,11 @@ Each represented claim MUST have a stable identity that is independent of its st
 
 **Rationale:** Stable identity is required for provenance and bidirectional traceability.
 
-**Source basis:** Approved project terminology; ECRA-1100 identity and traceability principles; shared semantic identity foundation.
+**Source basis:** [Approved Gen1 terminology](../00-project/terminology.md); ECRA-1100 identity and traceability principles; applicable shared semantic identity foundation.
 
-**Verification:** Identity persistence and serialization-independence tests MUST demonstrate that representation changes do not change logical claim identity.
+**Verification criteria:** Demonstrate that supported representation or storage changes do not change the logical claim identity.
+
+**Verification method:** Identity and contract verification.
 
 ## 5. Evidence Requirements
 
@@ -65,9 +77,11 @@ The system MUST represent evidence as information that is relevant to determinin
 
 **Rationale:** Evidence is a primary input to claim evaluation.
 
-**Source basis:** Approved Gen1 terminology and evaluation scope.
+**Source basis:** [Approved Gen1 terminology](../00-project/terminology.md); [approved Gen1 vision](../00-project/vision.md).
 
-**Verification:** Integration verification MUST demonstrate association of evidence with an evaluable claim.
+**Verification criteria:** Demonstrate representation of evidence and its association with an evaluable claim.
+
+**Verification method:** Integration verification.
 
 ### ECRA-G1-FUN-0004 — Evidence-to-claim association
 
@@ -75,9 +89,11 @@ The system MUST support an explicit association between evidence and the claim o
 
 **Rationale:** Evidence relevance must be represented explicitly rather than inferred solely from storage or retrieval context.
 
-**Source basis:** Gen1 evaluation path; ECRA-1000 evidence and traceability semantics.
+**Source basis:** [Approved Gen1 goals and non-goals](../00-project/goals-and-non-goals.md); ECRA-1000 evidence and traceability semantics.
 
-**Verification:** Relationship contract tests MUST demonstrate creation, retrieval, and traversal of the association.
+**Verification criteria:** Demonstrate creation, retrieval, and traversal of the evidence-to-claim association.
+
+**Verification method:** Relationship contract verification.
 
 ### ECRA-G1-INT-0001 — Evidence integrity
 
@@ -85,9 +101,11 @@ The system MUST preserve sufficient information to determine whether an acquired
 
 **Rationale:** Evidence integrity is an explicit Gen1 goal and is necessary for trustworthy evaluation.
 
-**Source basis:** Approved Gen1 goals and terminology.
+**Source basis:** [Approved Gen1 goals and non-goals](../00-project/goals-and-non-goals.md); [approved Gen1 terminology](../00-project/terminology.md).
 
-**Verification:** Tests MUST demonstrate detection or representation of integrity failure for supported integrity mechanisms.
+**Verification criteria:** Demonstrate detection or representation of integrity failure for supported integrity mechanisms.
+
+**Verification method:** Integrity verification.
 
 ### ECRA-G1-SEM-0002 — Evidence identity and lineage
 
@@ -95,9 +113,11 @@ An evidence item MUST have stable identity and MUST preserve its applicable vers
 
 **Rationale:** Evidence must remain traceable across representations and revisions.
 
-**Source basis:** Shared semantic identity/version foundation; ECRA-1000 provenance semantics.
+**Source basis:** Applicable shared semantic identity/version foundation; ECRA-1000 provenance semantics.
 
-**Verification:** Version-lineage tests MUST demonstrate reconstructability of supported evidence history.
+**Verification criteria:** Demonstrate reconstruction of supported evidence history across supported representations or revisions.
+
+**Verification method:** Identity and lineage verification.
 
 ## 6. Source Requirements
 
@@ -107,9 +127,11 @@ The system MUST represent the identifiable origin from which source material or 
 
 **Rationale:** Evaluation requires explicit distinction between information and its source.
 
-**Source basis:** Approved Gen1 terminology.
+**Source basis:** [Approved Gen1 terminology](../00-project/terminology.md).
 
-**Verification:** Integration tests MUST demonstrate association of source material/evidence with an identifiable source.
+**Verification criteria:** Demonstrate association of source material or evidence with an identifiable source.
+
+**Verification method:** Integration verification.
 
 ### ECRA-G1-INT-0002 — Source authenticity
 
@@ -117,9 +139,11 @@ Where authenticity can be assessed by the supported acquisition or validation me
 
 **Rationale:** Source authenticity is an explicit Gen1 trust property and MUST NOT be collapsed into source authority.
 
-**Source basis:** Approved Gen1 goals and terminology.
+**Source basis:** [Approved Gen1 goals and non-goals](../00-project/goals-and-non-goals.md); [approved Gen1 terminology](../00-project/terminology.md).
 
-**Verification:** Tests MUST demonstrate that authenticity assessment results are represented distinctly from source-authority information.
+**Verification criteria:** Demonstrate that authenticity assessment results are represented distinctly from source-authority information.
+
+**Verification method:** Contract and boundary verification.
 
 ### ECRA-G1-INT-0003 — Source authority
 
@@ -127,9 +151,11 @@ The system MUST represent source-authority information separately from source au
 
 **Rationale:** Authenticity establishes whether a source is genuine or attributable; authority concerns whether it is appropriate to rely upon for the relevant evaluation.
 
-**Source basis:** Approved Gen1 terminology.
+**Source basis:** [Approved Gen1 terminology](../00-project/terminology.md); [approved Gen1 goals and non-goals](../00-project/goals-and-non-goals.md).
 
-**Verification:** Contract tests MUST demonstrate independent representation and retrieval of authenticity and authority information.
+**Verification criteria:** Demonstrate independent representation and retrieval of authenticity and authority information.
+
+**Verification method:** Contract verification.
 
 ## 7. Acquired Artifact Requirements
 
@@ -139,9 +165,11 @@ Where ECRA acquires source material for evaluation, the system MUST preserve a r
 
 **Rationale:** The acquired representation is the object actually obtained by ECRA and must not be conflated with an abstract source or claim.
 
-**Source basis:** Approved Gen1 terminology.
+**Source basis:** [Approved Gen1 terminology](../00-project/terminology.md).
 
-**Verification:** Integration verification MUST demonstrate preservation and retrieval of an acquired artifact together with its applicable identity and provenance.
+**Verification criteria:** Demonstrate preservation and retrieval of an acquired artifact together with its applicable identity and provenance.
+
+**Verification method:** Integration verification.
 
 ### ECRA-G1-INT-0004 — Artifact integrity information
 
@@ -149,21 +177,25 @@ Where an acquired artifact is subject to an applicable integrity mechanism, the 
 
 **Rationale:** Artifact integrity is distinct from source authenticity and must remain auditable.
 
-**Source basis:** Approved Gen1 terminology and evidence-integrity goal.
+**Source basis:** [Approved Gen1 terminology](../00-project/terminology.md); approved evidence-integrity goal.
 
-**Verification:** Tests MUST demonstrate that supported integrity metadata remains associated with the acquired artifact.
+**Verification criteria:** Demonstrate that supported integrity metadata remains associated with the acquired artifact and permits the applicable integrity determination to be reproduced or assessed.
+
+**Verification method:** Integrity verification.
 
 ## 8. Provenance Requirements
 
 ### ECRA-G1-INT-0005 — Provenance preservation
 
-The system MUST preserve provenance sufficient to reconstruct the relevant origin, acquisition, transformation, and association history of claims, evidence, sources, and acquired artifacts within the Gen1 evaluation path.
+The system MUST preserve provenance sufficient to reconstruct the relevant origin, acquisition, transformation where applicable, and association history of claims, evidence, sources, and acquired artifacts within the Gen1 evaluation path.
 
 **Rationale:** Provenance is required to support trustworthy evaluation and traceability.
 
-**Source basis:** Approved Gen1 goals and terminology; ECRA-1000 provenance semantics.
+**Source basis:** [Approved Gen1 goals and non-goals](../00-project/goals-and-non-goals.md); [approved Gen1 terminology](../00-project/terminology.md); ECRA-1000 provenance semantics.
 
-**Verification:** End-to-end verification MUST demonstrate reconstruction of provenance for a representative evaluation input.
+**Verification criteria:** Demonstrate reconstruction of provenance for a representative evaluation input, including applicable transformations where they occur.
+
+**Verification method:** End-to-end verification.
 
 ### ECRA-G1-SEM-0003 — Provenance identity references
 
@@ -171,9 +203,11 @@ Provenance records MUST reference affected entities by stable identity rather th
 
 **Rationale:** Provenance must remain reconstructable when storage or representation changes.
 
-**Source basis:** Shared semantic identity foundation and ECRA-1100 traceability principles.
+**Source basis:** Applicable shared semantic identity foundation; ECRA-1100 traceability principles.
 
-**Verification:** Repository and serialization tests MUST demonstrate provenance continuity across supported representation changes.
+**Verification criteria:** Demonstrate provenance continuity across supported representation or storage changes.
+
+**Verification method:** Contract and serialization verification.
 
 ## 9. Integrity Boundary Requirements
 
@@ -183,9 +217,11 @@ The system MUST NOT treat successful artifact, evidence, or source-integrity che
 
 **Rationale:** Integrity establishes properties of information or origin; it does not by itself establish the truth of a claim.
 
-**Source basis:** Approved Gen1 terminology and evaluation scope.
+**Source basis:** [Approved Gen1 terminology](../00-project/terminology.md); [approved Gen1 goals and non-goals](../00-project/goals-and-non-goals.md).
 
-**Verification:** Negative tests MUST demonstrate that integrity success cannot by itself produce a positive claim-evaluation result.
+**Verification criteria:** Demonstrate that integrity success cannot by itself produce a positive claim-evaluation result.
+
+**Verification method:** Negative verification.
 
 ### ECRA-G1-INT-0007 — Authenticity shall not imply authority
 
@@ -193,9 +229,11 @@ The system MUST NOT treat successful source-authenticity assessment as sufficien
 
 **Rationale:** Source authenticity and source authority are distinct approved Gen1 concepts.
 
-**Source basis:** Approved Gen1 terminology.
+**Source basis:** [Approved Gen1 terminology](../00-project/terminology.md); [approved Gen1 goals and non-goals](../00-project/goals-and-non-goals.md).
 
-**Verification:** Negative and boundary tests MUST demonstrate independent handling of authenticity and authority.
+**Verification criteria:** Demonstrate independent handling of authenticity and authority.
+
+**Verification method:** Negative and boundary verification.
 
 ## 10. Traceability Requirements
 
@@ -205,9 +243,11 @@ The system MUST maintain explicit, typed, and traversable traceability between a
 
 **Rationale:** Gen1 evaluation results must be explainable and reconstructable from their inputs.
 
-**Source basis:** Approved Gen1 provenance/traceability goals; ECRA-1100 traceability framework.
+**Source basis:** [Approved Gen1 goals and non-goals](../00-project/goals-and-non-goals.md); ECRA-1100 traceability framework; ECRA-1000 provenance and evidence semantics.
 
-**Verification:** End-to-end tests MUST demonstrate bidirectional traversal from an evaluation input to its supporting entities and back to the evaluation input.
+**Verification criteria:** Demonstrate traversal from an evaluation input to its supporting entities and reconstruction of the corresponding relationships. The required semantic relationships need not be physically materialized in both directions when canonical inverse rules permit derivation.
+
+**Verification method:** End-to-end and relationship verification.
 
 ### ECRA-G1-TRC-0002 — Traceability preservation
 
@@ -217,7 +257,9 @@ Traceability relationships used by a Gen1 evaluation MUST remain reconstructable
 
 **Source basis:** ECRA-1100 baseline, lineage, and historical reconstruction principles.
 
-**Verification:** Baseline/replay tests MUST demonstrate reconstruction after creation of a later revision.
+**Verification criteria:** Demonstrate reconstruction of the applicable traceability relationships after creation of a later revision.
+
+**Verification method:** Baseline and replay verification.
 
 ## 11. Scope Boundaries
 
@@ -240,13 +282,16 @@ The principal source categories for this requirement set are:
 
 | Source | Role |
 |---|---|
-| Approved Gen1 project vision/goals | Product scope and objectives |
-| Approved Gen1 terminology | Canonical product-domain terminology |
+| [Approved Gen1 project vision](../00-project/vision.md) | Product scope and objectives |
+| [Approved Gen1 goals and non-goals](../00-project/goals-and-non-goals.md) | Gen1 scope boundaries and implementation objectives |
+| [Approved Gen1 terminology](../00-project/terminology.md) | Canonical product-domain terminology |
 | ECRA-1000 | Architecture, evidence, provenance, and architectural semantics |
 | ECRA-1100 | Requirement identity, traceability, lifecycle, evidence linkage, and engineering governance |
 | Shared Semantic Foundation | Shared identity, relationship, provenance, and constraint foundations where approved/applicable |
 
-The detailed repository-level source links will be added when the corresponding authoritative ECRA documents are incorporated into the repository.
+ECRA-1000, ECRA-1100, and the applicable Shared Semantic Foundation references will be linked to their authoritative repository documents when those documents are incorporated into the repository. Until then, their names are retained as authoritative source references rather than replaced with guessed repository paths.
+
+The document hierarchy is intentional: project-level documents establish scope and terminology; requirements documents define what the system must do; architecture and design documents elaborate how it is structured and behaves; implementation documents provide implementation guidance; and verification documents establish conformance.
 
 ## 13. Open Items
 
@@ -259,3 +304,5 @@ The following remain outside this PR and MUST be resolved before the relevant la
 - concrete acquisition mechanisms;
 - complete operational requirements;
 - complete verification/conformance requirements.
+
+Concrete real-life examples and scenarios for these requirements should be maintained separately as informative material rather than embedded in this normative requirements document.
