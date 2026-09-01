@@ -43,7 +43,7 @@ The system MUST represent the contextual information required to interpret and e
 
 **Source basis:** [Approved Gen1 terminology](../00-project/terminology.md); ECRA-1000 evidence-context and contextual evaluation semantics.
 
-**Verification criteria:** Demonstrate that an evaluation can be associated with an explicit context containing the information required by the applicable evaluation policy.
+**Verification criteria:** Demonstrate that an evaluation can be associated with an explicit context containing the information required by the applicable evaluation semantics.
 
 **Verification method:** Contract and integration verification.
 
@@ -87,13 +87,13 @@ Where contextual information is subject to an applicable integrity mechanism, th
 
 ### ECRA-G1-EVL-0001 — Evaluation execution
 
-The system MUST evaluate a claim using the applicable evidence and evaluation context according to the applicable evaluation rules or policy.
+The system MUST evaluate a claim using the applicable evidence and evaluation context according to the applicable evaluation rules or policy, where one is required by the evaluation semantics.
 
 **Rationale:** Evaluation is the central Gen1 capability and must operate on explicit inputs rather than implicit application state.
 
 **Source basis:** [Approved Gen1 vision](../00-project/vision.md); [approved Gen1 goals and non-goals](../00-project/goals-and-non-goals.md); ECRA-1000 policy-driven evaluation semantics.
 
-**Verification criteria:** Demonstrate execution of an evaluation with explicit claim, evidence, and context inputs and an applicable evaluation policy or rule set.
+**Verification criteria:** Demonstrate execution of an evaluation with explicit claim, evidence, and context inputs and, where required by the evaluation semantics, an applicable evaluation policy or rule set.
 
 **Verification method:** End-to-end functional verification.
 
@@ -135,13 +135,13 @@ The system MUST preserve sufficient information to reconstruct the material inpu
 
 ### ECRA-G1-EVL-0005 — Deterministic evaluation
 
-For equivalent evaluation inputs, context, applicable policies or rules, and execution conditions, the system MUST produce equivalent evaluation results, except where an explicitly represented nondeterministic factor is part of the evaluation semantics.
+For repeated evaluation of the same materially relevant inputs, contextual state, applicable evaluation rules or policy, and execution conditions, the system MUST produce reproducible evaluation results, except where an explicitly represented nondeterministic factor is part of the evaluation semantics.
 
 **Rationale:** Deterministic behavior is required for reproducibility, independent verification, and dispute resolution.
 
 **Source basis:** [Approved Gen1 goals and non-goals](../00-project/goals-and-non-goals.md); ECRA-1000 reproducible reasoning and policy-driven evaluation principles.
 
-**Verification criteria:** Demonstrate equivalent results for repeated evaluation of equivalent inputs under equivalent conditions, and demonstrate explicit representation of any supported nondeterministic factor.
+**Verification criteria:** Demonstrate reproducible results for repeated evaluation of the same materially relevant inputs under equivalent execution conditions, and demonstrate explicit representation of any supported nondeterministic factor.
 
 **Verification method:** Repeatability and replay verification.
 
@@ -173,7 +173,7 @@ Where the applicable evaluation semantics produce uncertainty, the system MUST r
 
 ### ECRA-G1-EVL-0008 — Evaluation result shall not imply downstream authority
 
-The system MUST NOT treat an evaluation result as an automatic authorization or operational decision unless a separately applicable decision or governance rule explicitly establishes that relationship.
+The system MUST NOT represent an evaluation result as itself constituting an authorization or operational decision unless a separately applicable decision or governance rule explicitly establishes that semantic relationship.
 
 **Rationale:** Evaluation establishes an evidential assessment; it does not by itself establish authority to act.
 
@@ -257,12 +257,9 @@ The document hierarchy is intentional: project-level documents establish scope a
 
 The following remain outside this PR and MUST be resolved before the relevant later implementation work:
 
-- final canonical SSF context and relationship names and inverse rules;
-- detailed evaluation rule/policy representation;
-- evaluation result vocabulary and outcome semantics;
-- trust assessment requirements where separately applicable;
-- concrete reasoning mechanisms, if any, within approved Gen1 scope;
-- complete operational requirements;
-- complete verification/conformance requirements.
-
-Concrete real-life examples and scenarios for these requirements should be maintained separately as informative material rather than embedded in this normative requirements document.
+1. Define the detailed evaluation-policy/rule representation and execution contract at the appropriate architecture/design layer.
+2. Define the formal semantics for result equivalence, reproducibility, and supported nondeterministic factors.
+3. Define the detailed uncertainty representation and interpretation rules.
+4. Define the detailed evaluation-result schema and serialization contract.
+5. Define the complete verification/conformance methodology under the applicable ECRA verification framework.
+6. Add repository links to ECRA-1000, ECRA-1100, and the applicable Shared Semantic Foundation documents once those authoritative documents are incorporated.
