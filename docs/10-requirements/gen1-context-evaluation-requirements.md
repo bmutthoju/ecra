@@ -141,7 +141,7 @@ For repeated evaluation of the same materially relevant inputs, contextual state
 
 **Source basis:** [Approved Gen1 goals and non-goals](../00-project/goals-and-non-goals.md); ECRA-1000 reproducible reasoning and policy-driven evaluation principles.
 
-**Verification criteria:** Demonstrate reproducible results for repeated evaluation of the same materially relevant inputs under equivalent execution conditions, and demonstrate explicit representation of any supported nondeterministic factor.
+**Verification criteria:** Demonstrate reproducible results for repeated evaluation of the same materially relevant inputs under equivalent execution conditions, and demonstrate explicit representation of any supported nondeterministic factor. Where a supported nondeterministic factor materially affects reproducibility or interpretation, demonstrate that the factor is identifiable in the evaluation result or its explanatory/evaluation-basis information.
 
 **Verification method:** Repeatability and replay verification.
 
