@@ -1,6 +1,6 @@
 # ECRA Generation 1 — Context and Evaluation Requirements
 
-> Status: DRAFT
+> Status: APPROVED
 > Authority: IMPLEMENTATION
 > Generation: GEN1
 > Scope: Context and evaluation requirements
