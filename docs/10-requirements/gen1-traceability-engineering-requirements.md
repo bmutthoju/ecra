@@ -177,7 +177,7 @@ Change-impact results MUST identify the traceability relationships and artifact 
 
 ### ECRA-G1-INT-0009 — Baseline traceability integrity
 
-Released or baselined traceability relationships MUST remain immutable with respect to the historical state they describe; subsequent changes MUST create new lineage rather than silently altering the historical baseline.
+Released or baselined traceability relationships MUST remain immutable with respect to the historical state they describe; subsequent changes MUST establish new lineage rather than silently altering the historical baseline.
 
 **Rationale:** Historical engineering and verification evidence must remain reconstructable after later changes.
 
