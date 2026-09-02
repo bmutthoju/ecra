@@ -1,6 +1,6 @@
 # ECRA Generation 1 — Traceability & Engineering Requirements
 
-> Status: DRAFT
+> Status: APPROVED
 > Authority: IMPLEMENTATION
 > Generation: GEN1
 > Scope: Traceability and engineering requirements
