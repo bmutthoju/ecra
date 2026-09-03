@@ -1,6 +1,6 @@
 # ECRA-1200 — Architecture Description Language
 
-> Status: REVIEW
+> Status: APPROVED
 > Authority: NORMATIVE
 > Generation: GEN1
 > Scope: Architecture description language baseline
