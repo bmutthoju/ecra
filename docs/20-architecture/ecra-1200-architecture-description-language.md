@@ -29,7 +29,7 @@ ECRA-1200 depends on and specializes the semantics established by earlier ECRA s
 
 ### 3.1 Shared Semantic Foundation
 
-The SSF provides genuinely shared semantic foundations such as identity, lifecycle, metadata, relationships, constraints, provenance, and extension semantics. ECRA-1200 specializes these foundations for architecture description rather than creating a parallel semantic hierarchy.
+The SSF provides genuinely shared semantic foundations such as identity, lifecycle, metadata, relationships, constraints, provenance, and extension semantics. ECRA-1200 specializes these foundations for architecture description rather than establishing a parallel semantic hierarchy.
 
 ### 3.2 ECRA-1000
 
@@ -61,7 +61,7 @@ ECRA-1200 shall not redefine a concept whose authoritative semantics belong to a
 
 ### 4.3 View Independence
 
-Views are projections or representations of an underlying architecture description. A view does not create an independent architecture merely by presenting selected architectural content.
+Views are projections or representations of an underlying architecture description. A view does not constitute an independent architecture merely by presenting selected architectural content.
 
 ### 4.4 Separation of Semantics and Notation
 
@@ -209,7 +209,7 @@ These values describe semantic state. ECRA-1200 does not prescribe the algorithm
 
 An **Architectural Assertion** represents an explicit statement made within an Architecture Description about an architectural subject, relationship, property, condition, or interpretation.
 
-Assertions provide a bounded semantic mechanism for representing architectural statements without creating a competing portfolio-wide hierarchy for concepts owned by other specifications.
+Assertions provide a bounded semantic mechanism for representing architectural statements without introducing a competing portfolio-wide hierarchy for concepts owned by other specifications.
 
 An assertion may be associated with relevant evidence, provenance, requirements, constraints, decisions, or other artifacts according to the authoritative semantics of those artifacts.
 
