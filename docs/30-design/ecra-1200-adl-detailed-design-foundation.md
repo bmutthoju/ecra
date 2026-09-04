@@ -102,6 +102,14 @@ Scope may be expressed through references to architectural subjects, concerns, v
 
 Scope is contextual and does not require a universal decomposition of architecture.
 
+### 4.3 Subject Definition
+
+For purposes of this detailed design, a **subject** is a semantic referent that an ADL construct can describe, relate, constrain, assert about, or reference.
+
+A subject may be an ADL-owned semantic construct or a semantic concept owned by another applicable ECRA specification. The term **subject** therefore identifies a role in an ADL relationship or construct; it does not establish a new portfolio-wide root type or semantic ownership category.
+
+Where a subject is ADL-owned and independently referenceable, it shall have the stable identity required by Section 5. Where a subject is externally owned, its identity and semantics remain governed by the applicable owning specification.
+
 ## 5. Identity Model
 
 Every ADL-owned semantic subject shall have a stable identity that is independent of:
@@ -475,21 +483,39 @@ An ADL construct shall not redefine a concept whose authoritative semantics belo
 
 The same architectural subject represented in multiple views retains the same semantic identity.
 
+### DIR-13 — Representation Round-Trip Integrity
+
+A conforming machine representation shall provide a semantically lossless correspondence between the logical ADL model and its represented form. A logical model mapped to a representation and reconstructed from that representation shall preserve the same semantic identities, construct types, relationships, and other normative semantics required by the ADL model, subject only to explicitly defined representation equivalence rules.
+
+The requirement is semantic rather than syntactic: a representation need not have a literal one-to-one field correspondence with the logical model, provided that the mapping preserves the complete required meaning and does not introduce ambiguous or competing interpretations.
+
 ## 18. Machine Representation Boundary
 
 The logical model established here is the semantic source for machine-readable representation design.
 
-The machine representation shall be capable of preserving the logical constructs and relationships defined here, including identity, type, relationships, lifecycle, provenance, views, viewpoints, constraints, assertions, traceability, and extensions.
+The representation contract shall define a bidirectional semantic mapping between the logical ADL model and its machine-readable representation:
 
-This design does not prescribe:
+```text
+Logical ADL Model
+       |
+       | forward semantic mapping
+       v
+Machine Representation
+       |
+       | reverse semantic mapping
+       v
+Logical ADL Model
+```
 
-- a concrete syntax;
-- a wire format;
-- a database schema;
-- an API contract;
-- a transport protocol.
+The forward mapping shall represent the semantics required by the logical model, and the reverse mapping shall reconstruct the corresponding logical semantics. The mappings shall be semantically lossless for all normative ADL constructs and properties required to be represented.
 
-Those concerns shall be developed in later design and contract increments and, where applicable, ECRA-1300.
+A conforming representation shall preserve, as applicable, identity, type, relationships, lifecycle, provenance, views, viewpoints, constraints, assertions, traceability, and extensions. It shall not silently omit, merge, duplicate, or ambiguously reinterpret a normative semantic subject.
+
+Representation validation shall verify the required correspondence between the logical model and the represented form. In particular, validation shall detect loss of required constructs or identities, invalid references, semantic ambiguity, and other conditions that prevent faithful reconstruction of the logical model.
+
+Round-trip semantic equivalence shall be a normative design property: where a logical ADL model is represented and then reconstructed, the resulting logical model shall be semantically equivalent to the original within explicitly defined equivalence rules.
+
+The requirement does not prescribe a concrete syntax, wire format, database schema, API contract, or transport protocol. Concrete serialization and interchange mechanisms remain outside this design foundation and shall be developed in later design and contract increments and, where applicable, ECRA-1300.
 
 ## 19. Design-to-Architecture Traceability
 
@@ -506,9 +532,9 @@ This detailed-design increment directly realizes the following approved ECRA-120
 | Stakeholders / Concerns | External-reference participation model |
 | Viewpoints | Viewpoint logical structure |
 | Views | View logical structure and DIR-05 / DIR-12 |
-| Consistency | DIR-01 through DIR-12 |
+| Consistency | DIR-01 through DIR-13 |
 | Traceability | Explicit traceability relationship model |
-| Machine Representation | Semantic source and preservation boundary |
+| Machine Representation | Bidirectional semantic mapping, lossless preservation, validation, and round-trip equivalence |
 | Extension Model | Explicit extension structure and DIR-10 |
 | Semantic Ownership | Cross-specification ownership rules and DIR-11 |
 
@@ -521,7 +547,7 @@ The following should be addressed as separate small design increments rather tha
 3. **Constraint and assertion semantics** — precise expression structure and association rules.
 4. **Viewpoint and view specification model** — canonical viewpoint definitions and view conformance structure.
 5. **Consistency model** — detailed invariant definitions and machine-checkable conditions.
-6. **Machine representation design** — abstract representation structures and compatibility behavior.
+6. **Machine representation design** — concrete abstract representation structures, bidirectional mapping rules, equivalence rules, validation obligations, and compatibility behavior.
 7. **ADL conformance model** — detailed conformance subjects and requirements.
 8. **Implementation contracts** — APIs, persistence, validation, and executable interfaces after design approval.
 
@@ -531,4 +557,4 @@ These increments shall remain subordinate to this approved architecture baseline
 
 This document is the **ECRA-1200 ADL Detailed Design Foundation** and is submitted for review.
 
-Approval establishes the logical design foundation for subsequent ECRA-1200 detailed-design increments. It does not authorize implementation of unspecified behavior or resolve portfolio-level ownership questions outside ECRA-1200 scope.
+Approval establishes the logical design foundation for subsequent ECRA-1200 detailed-design increments. It does not authorize implementation of unspecified behavior or resolve portfolio-level ownership questions outside ECRA-1200.
