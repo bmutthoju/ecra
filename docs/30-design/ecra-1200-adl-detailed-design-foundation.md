@@ -175,7 +175,7 @@ Presentation-only attributes shall not be treated as semantic properties unless 
 
 ### 6.3 Lifecycle
 
-Lifecycle state is represented separately from semantic identity. A lifecycle transition shall not implicitly create a new semantic identity unless the applicable lifecycle semantics explicitly require a new subject.
+Lifecycle state is represented separately from semantic identity. A lifecycle transition shall not implicitly establish a new semantic identity unless the applicable lifecycle semantics explicitly require a new subject.
 
 ### 6.4 Provenance
 
