@@ -1,6 +1,6 @@
 # ECRA-1200 — ADL Detailed Design Foundation
 
-> Status: REVIEW
+> Status: APPROVED
 > Authority: NORMATIVE
 > Generation: GEN1
 > Scope: Detailed design foundation for the ECRA Architecture Description Language
