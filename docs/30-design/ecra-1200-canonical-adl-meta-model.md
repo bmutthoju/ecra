@@ -105,7 +105,7 @@ The canonical ADL construct set consists of:
 8. Context Reference;
 9. Extension.
 
-Shared concepts such as Entity, Artifact, Relationship, Constraint, lifecycle, provenance, and identity are reused according to SSF and applicable owning specifications. Externally owned concepts are referenced rather than recreated as ADL-owned root constructs.
+Shared concepts such as Entity, Artifact, Relationship, Constraint, lifecycle, provenance, and identity are reused according to SSF and applicable owning specifications. Externally owned concepts are referenced rather than reproduced as ADL-owned root constructs.
 
 ## 6. Architecture Description
 
