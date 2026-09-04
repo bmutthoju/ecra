@@ -45,7 +45,7 @@ Those concerns remain deferred to their designated design increments.
 
 This meta-model is subordinate to the approved ECRA-1200 ADL architecture baseline and the approved ADL Detailed Design Foundation.
 
-Where this document refines a foundation concept, the refinement shall be interpreted consistently with the foundation. It shall not create competing ownership for concepts governed by SSF, ECRA-1000, ECRA-1100, ECRA-1300, ECRA-1400, or ECRA-1500.
+Where this document refines a foundation concept, the refinement shall be interpreted consistently with the foundation. It shall not establish competing ownership for concepts governed by SSF, ECRA-1000, ECRA-1100, ECRA-1300, ECRA-1400, or ECRA-1500.
 
 The term **subject** retains the meaning established by the foundation: a semantic referent that an ADL construct can describe, relate, constrain, assert about, or reference. It is a semantic role, not a new portfolio-wide root type.
 
@@ -448,7 +448,7 @@ Containment establishes that a construct belongs to the logical composition of a
 
 ### 16.2 Reference
 
-A reference identifies an existing semantic subject without creating another semantic subject.
+A reference identifies an existing semantic subject without establishing another semantic subject.
 
 References shall be used when:
 
@@ -480,7 +480,7 @@ The following rules are normative for the canonical meta-model.
 | CM-09 | Logical containment does not imply transfer of ownership of externally governed concepts. |
 | CM-10 | A presentation object does not acquire an independent semantic identity merely through inclusion in a View. |
 | CM-11 | Extensions identify their base construct and preserve its semantics unless an explicit specialization rule applies. |
-| CM-12 | Lifecycle state does not by itself create a new semantic identity. |
+| CM-12 | Lifecycle state does not by itself establish a new semantic identity. |
 | CM-13 | Multiple Views of the same subject reference the same semantic identity. |
 | CM-14 | A semantic reference shall not silently be converted into a new declaration during representation or reconstruction. |
 
@@ -548,7 +548,7 @@ The canonical structure shall satisfy the following invariants:
 3. **Containment integrity** — contained ADL constructs belong to the intended Architecture Description context.
 4. **Endpoint integrity** — relationship source and target references resolve to permitted subjects.
 5. **View integrity** — each View has one governing Viewpoint and one source Architecture Description.
-6. **View identity preservation** — a View does not create new identities for subjects it represents.
+6. **View identity preservation** — a View does not establish new identities for subjects it represents.
 7. **Ownership integrity** — externally governed concepts retain their authoritative semantics.
 8. **Extension integrity** — extensions remain distinguishable and semantically compatible with their base constructs.
 9. **Lifecycle integrity** — lifecycle transitions do not silently change semantic identity.
