@@ -615,12 +615,12 @@ The following rules are normative for the canonical meta-model.
 | Viewpoint | addresses | Concern | 0..* |
 | Viewpoint | intended for | Stakeholder | 0..* |
 | Context Reference | identifies | External Concept / Resource | 1 |
-| Context Reference | may preserve | Preserved External Snapshot | 0..1..* |
+| Context Reference | may preserve | Preserved External Snapshot | 0..* |
 | Extension | extends / specializes | Base Construct | 1 |
 
 The matrix expresses canonical structural expectations. Detailed relationship semantics, including permitted target types and relationship-specific multiplicities, remain the responsibility of the later relationship catalog.
 
-The Preserved External Snapshot cardinality is shown as 0..1..* to indicate that a reference may have zero, one, or multiple historical snapshots. Concrete collection representation is deferred to machine-representation design.
+A Context Reference may have zero, one, or multiple historical preserved snapshots. Concrete collection representation is deferred to machine-representation design.
 
 ## 19. Lifecycle and Provenance Composition
 
