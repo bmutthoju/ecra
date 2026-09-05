@@ -20,10 +20,10 @@ This increment defines:
 
 - the canonical ADL construct set;
 - construct identity and identity-domain rules;
-- containment and reference semantics;
+- Architecture Description membership, containment, and reference semantics;
 - cardinality and compositional rules;
 - canonical relationships among Architecture Description, elements, relationships, constraints, assertions, viewpoints, views, and extensions;
-- treatment of externally owned concepts;
+- treatment of externally owned concepts, including reference integrity and preserved external snapshots;
 - model-wide invariants required by the canonical structure.
 
 This increment does not define:
@@ -37,7 +37,8 @@ This increment does not define:
 - the normative relationship catalog;
 - detailed constraint/assertion expression languages;
 - canonical viewpoint catalog;
-- conformance assessment procedures.
+- conformance assessment procedures;
+- storage, archival, synchronization, or monitoring mechanisms for preserved external snapshots.
 
 Those concerns remain deferred to their designated design increments.
 
@@ -56,13 +57,24 @@ The canonical ADL meta-model is:
 ```text
 Architecture Description
 |
-+-- owns / contains --> Architectural Elements [0..*]
-|                         |
-|                         +-- properties [0..*]
-|                         +-- constraints [0..*]
-|                         +-- assertions [0..*]
-|                         +-- traceability references [0..*]
-|                         +-- extension metadata [0..*]
++-- contains --> Architecture Description Members [0..*]
+|                  |
+|                  +-- Architectural Element
+|                  +-- Architectural Relationship
+|                  +-- Architectural Constraint
+|                  +-- Architectural Assertion
+|                  +-- Viewpoint
+|                  +-- View
+|                  +-- Context Reference
+|                  +-- Extension
+|
++-- contains --> Architectural Elements [0..*]
+|                  |
+|                  +-- properties [0..*]
+|                  +-- constraints [0..*]
+|                  +-- assertions [0..*]
+|                  +-- traceability references [0..*]
+|                  +-- extension metadata [0..*]
 |
 +-- contains --> Architectural Relationships [0..*]
 |                  |
@@ -75,35 +87,38 @@ Architecture Description
 +-- contains --> Architectural Assertions [0..*]
 |                  +-- subject references [0..*]
 |
-+-- owns / contains --> Viewpoints [0..*]
-|                         +-- concerns --> Concern [0..*]
-|                         +-- stakeholders --> Stakeholder [0..*]
++-- contains --> Viewpoints [0..*]
+|                  +-- concerns --> Concern [0..*]
+|                  +-- stakeholders --> Stakeholder [0..*]
 |
-+-- owns / contains --> Views [0..*]
-|                         +-- viewpoint --> Viewpoint [1]
-|                         +-- source description --> Architecture Description [1]
-|                         +-- represented subjects [0..*]
++-- contains --> Views [0..*]
+|                  +-- viewpoint --> Viewpoint [1]
+|                  +-- source description --> Architecture Description [1]
+|                  +-- represented subjects [0..*]
 |
 +-- contains --> Context References [0..*]
 |
 +-- contains --> Extensions [0..*]
 ```
 
-The diagram expresses semantic structure and cardinality expectations. It is not a concrete object or serialization hierarchy.
+The diagram expresses semantic structure and cardinality expectations. It is not a concrete object or serialization hierarchy. The Architecture Description Member role is the canonical membership mechanism; the repeated construct lines show the member construct categories for readability and do not introduce a second containment mechanism.
 
 ## 5. Canonical Construct Set
 
 The canonical ADL construct set consists of:
 
 1. Architecture Description;
-2. Architectural Element;
-3. Architectural Relationship;
-4. Architectural Constraint;
-5. Architectural Assertion;
-6. Viewpoint;
-7. View;
-8. Context Reference;
-9. Extension.
+2. Architecture Description Member as a membership role;
+3. Architectural Element;
+4. Architectural Relationship;
+5. Architectural Constraint;
+6. Architectural Assertion;
+7. Viewpoint;
+8. View;
+9. Context Reference;
+10. Extension.
+
+Architecture Description Member is a role applied to an ADL-owned construct that establishes membership in an Architecture Description. It is not a new semantic root type or an independently modeled portfolio concept.
 
 Shared concepts such as Entity, Artifact, Relationship, Constraint, lifecycle, provenance, and identity are reused according to SSF and applicable owning specifications. Externally owned concepts are referenced rather than reproduced as ADL-owned root constructs.
 
@@ -119,6 +134,7 @@ An Architecture Description may contain or reference:
 
 | Component | Cardinality | Semantics |
 |---|---:|---|
+| Architecture Description Members | 0..* | Membership role for ADL-owned constructs contained in the description |
 | Architectural Elements | 0..* | ADL-owned identifiable architectural subjects |
 | Architectural Relationships | 0..* | Explicit semantic associations |
 | Architectural Constraints | 0..* | Conditions applicable to subjects |
@@ -128,13 +144,27 @@ An Architecture Description may contain or reference:
 | Context References | 0..* | References to relevant external concepts |
 | Extensions | 0..* | Controlled specializations/extensions |
 
-### 6.3 Containment
+The construct-specific rows are the member categories represented by the Architecture Description Member role. They shall not be interpreted as independent ownership relationships in addition to membership.
+
+### 6.3 Structural Validity and Descriptive Completeness
+
+The 0..* cardinalities in this meta-model describe the permitted structural cardinality of the corresponding collections. They do not imply that every Architecture Description is substantively complete merely because it is structurally valid.
+
+An Architecture Description may therefore contain zero Architecture Description Members and remain structurally valid, provided that the Architecture Description itself satisfies its mandatory identity and scope requirements. Such a description represents an explicitly declared but substantively empty or not-yet-populated description context.
+
+Descriptive completeness is a separate semantic property determined against the Architecture Description's declared scope, purpose, and applicable requirements. A structurally valid Architecture Description may be **incomplete** without being structurally invalid. The determination of completeness is outside this increment unless imposed by an applicable specialization or conformance requirement.
+
+### 6.4 Containment and Membership
 
 An Architecture Description is the logical owner of the ADL constructs that form its description scope. Logical containment does not require physical co-location in storage or serialization.
 
+An **Architecture Description Member** establishes that an ADL-owned construct belongs to the logical composition of the Architecture Description. Membership is a containment role, not a new identity-bearing construct. A member retains the identity and type of the construct to which the role applies.
+
+A conforming representation shall be able to distinguish an ADL-owned construct that is a member of an Architecture Description from a semantic subject that is merely referenced by that Architecture Description or one of its members.
+
 A referenced externally owned concept is not thereby contained as an ADL-owned concept.
 
-### 6.4 Scope
+### 6.5 Scope
 
 An Architecture Description shall have sufficient scope information to determine the architectural subject matter to which the description applies. Scope may be contextual and does not imply a universal decomposition of architecture.
 
@@ -152,6 +182,8 @@ The following ADL-owned constructs are independently referenceable and therefore
 - Viewpoint;
 - View;
 - Extension, when independently declared and referenceable.
+
+Architecture Description Member is not independently identity-bearing; it is a membership role applied to an identity-bearing ADL construct.
 
 A Context Reference may carry an identifier required to resolve the external concept, but that identifier does not establish ownership of the referenced external concept.
 
@@ -201,9 +233,9 @@ The detailed normative type catalog is outside this increment.
 
 A property is an explicitly identified semantic characteristic of the element. Presentation-only information shall not become a semantic property merely because it is associated with an element.
 
-### 8.5 Element Containment
+### 8.5 Element Membership
 
-An element is logically associated with exactly one Architecture Description within a given description context unless an explicit external-reference or composition rule permits otherwise.
+An Architectural Element may participate in exactly one Architecture Description as an ADL-owned member within a given description context unless an explicit composition rule permits otherwise.
 
 The same semantic element may be referenced from multiple Views without being duplicated semantically.
 
@@ -241,9 +273,9 @@ A relationship has its own semantic identity where it is independently reference
 
 This permits two semantically distinct relationships between the same subjects when their relationship types or other semantics distinguish them.
 
-### 9.5 Relationship Containment
+### 9.5 Relationship Membership
 
-An Architectural Relationship is logically associated with an Architecture Description. It may additionally be referenced from its source, target, views, constraints, assertions, or traceability structures.
+An Architectural Relationship is an ADL-owned member of its Architecture Description within the applicable description context. It may additionally be referenced from its source, target, views, constraints, assertions, or traceability structures.
 
 ## 10. Architectural Constraint
 
@@ -281,6 +313,10 @@ The currently established logical operators remain AND, OR, NOT, IMPLIES, and EQ
 
 Constraint status is descriptive semantic state. Permitted values remain those established by the foundation unless extended through an approved semantic change.
 
+### 10.6 Constraint Membership
+
+An Architectural Constraint is an ADL-owned member of its Architecture Description within the applicable description context. Its subject references identify the subjects to which the condition applies and do not themselves establish additional membership.
+
 ## 11. Architectural Assertion
 
 ### 11.1 Definition
@@ -310,6 +346,10 @@ An assertion may be contextual rather than tied to a single subject; therefore s
 ### 11.4 Ownership Boundary
 
 An assertion does not become an Architecture Decision, Discovery Evidence item, Validation Result, Requirement, or other externally owned construct merely by referencing one.
+
+### 11.5 Assertion Membership
+
+An Architectural Assertion is an ADL-owned member of its Architecture Description within the applicable description context. Its associations to constraints, evidence, requirements, decisions, and other subjects do not transfer ownership of those referenced concepts.
 
 ## 12. Viewpoint
 
@@ -342,6 +382,10 @@ A Viewpoint may address zero or more concerns at the generic meta-model level; a
 ### 12.4 Viewpoint Independence
 
 A Viewpoint defines conventions and expectations. It does not contain independent semantic copies of the architectural subjects presented by Views constructed under it.
+
+### 12.5 Viewpoint Membership
+
+A Viewpoint is an ADL-owned member of its Architecture Description within the applicable description context. Its references to concerns and stakeholders remain external references governed by ECRA-1000.
 
 ## 13. View
 
@@ -382,6 +426,10 @@ A View may select, aggregate, filter, or otherwise project underlying architectu
 
 The precise projection and aggregation semantics remain deferred.
 
+### 13.7 View Membership
+
+A View is an ADL-owned member of its Architecture Description within the applicable description context. Its source Architecture Description reference identifies the semantic context from which its content is derived and does not create a second Architecture Description.
+
 ## 14. Context Reference
 
 ### 14.1 Definition
@@ -409,6 +457,43 @@ A Context Reference records participation or dependency on an externally governe
 ### 14.4 Resolution
 
 A context reference shall contain sufficient information to resolve its target according to the identity and reference semantics of the owning specification. Concrete URI, key, registry, or transport mechanisms are outside this increment.
+
+### 14.5 Reference Integrity and Preservation
+
+Where a Context Reference identifies an externally controlled resource or concept whose continued availability or content is material to the Architecture Description, the reference shall support sufficient integrity metadata to establish what resource was observed and relied upon.
+
+The integrity metadata may include, as applicable:
+
+- reference identity;
+- external locator;
+- owning authority or namespace;
+- external version, revision, or equivalent identifier, where available;
+- observed state;
+- last verified timestamp;
+- integrity or fingerprint information, where applicable;
+- change-detection information;
+- dependency or criticality information;
+- mitigation or impact reference.
+
+A Context Reference may additionally include a **Preserved External Snapshot**: a preserved copy of the externally referenced resource as observed at a particular point in time.
+
+A Preserved External Snapshot shall be associated with the corresponding external reference observation and, where applicable, shall preserve:
+
+- snapshot identity;
+- snapshot content or preserved representation;
+- capture timestamp;
+- integrity or fingerprint information;
+- provenance sufficient to establish the snapshot's origin and observation context.
+
+A preserved snapshot records historical observed content. It shall not, by itself, be interpreted as the current authoritative external resource or as evidence that the external resource remains available or unchanged.
+
+The preservation capability is a semantic resilience and provenance mechanism. This increment does not prescribe snapshot storage technology, archival systems, synchronization services, monitoring mechanisms, retention periods, or mitigation workflows.
+
+External reference state shall distinguish, as applicable, between an externally available and verified resource, a changed resource, an unavailable resource, and an unverified resource. The definitive state vocabulary and operational transition rules may be refined by an applicable later design increment.
+
+### 14.6 Context Reference Membership
+
+A Context Reference is an ADL-owned member of its Architecture Description. The externally referenced concept or resource is not thereby made an ADL-owned member.
 
 ## 15. Extension
 
@@ -438,13 +523,19 @@ An extension shall:
 
 An extension shall not silently redefine an existing normative construct.
 
+### 15.4 Extension Membership
+
+An Extension is an ADL-owned member of its Architecture Description when it is declared as part of that description. Its base construct reference does not create an additional declaration or alter the base construct's membership.
+
 ## 16. Containment versus Reference
 
 The meta-model distinguishes logical containment from semantic reference.
 
 ### 16.1 Containment
 
-Containment establishes that a construct belongs to the logical composition of an Architecture Description. A contained construct may still be referenced by other constructs.
+Containment establishes that a construct belongs to the logical composition of an Architecture Description. The **Architecture Description Member** role represents this containment relationship without creating a new semantic root type.
+
+A contained construct may still be referenced by other constructs.
 
 ### 16.2 Reference
 
@@ -457,9 +548,20 @@ References shall be used when:
 - a Constraint identifies applicable subjects;
 - an Assertion identifies subjects or associated governed artifacts;
 - a Viewpoint identifies stakeholders or concerns;
-- an ADL construct participates in externally owned semantics.
+- an ADL construct participates in externally owned semantics;
+- a View identifies its source Architecture Description;
+- a Context Reference identifies an externally governed concept or resource.
 
-### 16.3 No Implicit Duplication
+### 16.3 Membership versus Reference
+
+Membership and reference are distinct semantics:
+
+- **membership** establishes that an ADL-owned construct forms part of the Architecture Description's logical composition;
+- **reference** identifies an existing semantic subject without making that subject an additional ADL-owned construct.
+
+An externally governed concept may be referenced by an Architecture Description without becoming an Architecture Description Member. An ADL-owned construct may be a member while also containing references to other members or external subjects.
+
+### 16.4 No Implicit Duplication
 
 A reference shall not be interpreted as semantic duplication. A conforming representation shall preserve the distinction between an existing referenced subject and a newly declared subject.
 
@@ -483,11 +585,18 @@ The following rules are normative for the canonical meta-model.
 | CM-12 | Lifecycle state does not by itself establish a new semantic identity. |
 | CM-13 | Multiple Views of the same subject reference the same semantic identity. |
 | CM-14 | A semantic reference shall not silently be converted into a new declaration during representation or reconstruction. |
+| CM-15 | Every ADL-owned member has one Architecture Description membership within the applicable description context unless an explicit composition rule permits otherwise. |
+| CM-16 | Architecture Description Member is a containment role and does not establish an additional semantic identity. |
+| CM-17 | Structural validity does not imply descriptive completeness; completeness is assessed against declared scope, purpose, and applicable requirements. |
+| CM-18 | Where an external reference is material to the Architecture Description, its integrity metadata shall be sufficient to identify the observed resource and support impact assessment when its state changes or becomes unavailable. |
+| CM-19 | A preserved external snapshot represents historical observed content and shall not be treated as the current authoritative external resource solely because it is preserved. |
 
 ## 18. Cross-Construct Cardinality Matrix
 
 | Source construct | Relationship | Target | Cardinality |
 |---|---|---|---:|
+| Architecture Description | contains members | Architecture Description Member | 0..* |
+| Architecture Description Member | applies to | ADL-owned construct | 1 |
 | Architecture Description | contains | Architectural Element | 0..* |
 | Architecture Description | contains | Architectural Relationship | 0..* |
 | Architecture Description | contains | Architectural Constraint | 0..* |
@@ -505,9 +614,13 @@ The following rules are normative for the canonical meta-model.
 | View | represents | Subject | 0..* |
 | Viewpoint | addresses | Concern | 0..* |
 | Viewpoint | intended for | Stakeholder | 0..* |
+| Context Reference | identifies | External Concept / Resource | 1 |
+| Context Reference | may preserve | Preserved External Snapshot | 0..1..* |
 | Extension | extends / specializes | Base Construct | 1 |
 
 The matrix expresses canonical structural expectations. Detailed relationship semantics, including permitted target types and relationship-specific multiplicities, remain the responsibility of the later relationship catalog.
+
+The Preserved External Snapshot cardinality is shown as 0..1..* to indicate that a reference may have zero, one, or multiple historical snapshots. Concrete collection representation is deferred to machine-representation design.
 
 ## 19. Lifecycle and Provenance Composition
 
@@ -518,6 +631,8 @@ Where applicable, each identity-bearing construct may carry or reference lifecyc
 A lifecycle transition shall not implicitly duplicate, merge, or retype a semantic subject.
 
 A provenance record may identify origin, derivation, transformation, or attribution without becoming a competing architectural element.
+
+For external references and preserved snapshots, provenance shall be sufficient to distinguish the external observation from the preserved historical copy. Preservation does not transfer authority over the external resource to ECRA.
 
 The authoritative vocabularies and detailed semantics remain governed by SSF and applicable owning specifications.
 
@@ -546,13 +661,17 @@ The canonical structure shall satisfy the following invariants:
 1. **Identity uniqueness** — identity-bearing subjects are uniquely identifiable within their applicable identity domains.
 2. **Reference resolution** — required references resolve to the intended semantic subject.
 3. **Containment integrity** — contained ADL constructs belong to the intended Architecture Description context.
-4. **Endpoint integrity** — relationship source and target references resolve to permitted subjects.
-5. **View integrity** — each View has one governing Viewpoint and one source Architecture Description.
-6. **View identity preservation** — a View does not establish new identities for subjects it represents.
-7. **Ownership integrity** — externally governed concepts retain their authoritative semantics.
-8. **Extension integrity** — extensions remain distinguishable and semantically compatible with their base constructs.
-9. **Lifecycle integrity** — lifecycle transitions do not silently change semantic identity.
-10. **Representation integrity** — representation and reconstruction preserve the canonical model subject to explicitly defined semantic equivalence rules.
+4. **Membership integrity** — Architecture Description Member roles identify the ADL-owned constructs that form part of the Architecture Description without creating duplicate semantic identities.
+5. **Endpoint integrity** — relationship source and target references resolve to permitted subjects.
+6. **View integrity** — each View has one governing Viewpoint and one source Architecture Description.
+7. **View identity preservation** — a View does not establish new identities for subjects it represents.
+8. **Ownership integrity** — externally governed concepts retain their authoritative semantics.
+9. **Extension integrity** — extensions remain distinguishable and semantically compatible with their base constructs.
+10. **Lifecycle integrity** — lifecycle transitions do not silently change semantic identity.
+11. **External reference integrity** — material external references retain sufficient identity, version/revision, observation, and integrity information to establish what was relied upon and to support impact assessment when the external resource changes or becomes unavailable.
+12. **Snapshot integrity** — a preserved external snapshot is attributable to a specific external observation, has sufficient integrity information where feasible, and remains distinguishable from the current external resource.
+13. **Representation integrity** — representation and reconstruction preserve the canonical model subject to explicitly defined semantic equivalence rules.
+14. **Completeness distinction** — structural validity and descriptive completeness remain distinct properties; an empty or partially populated Architecture Description may be structurally valid while incomplete against its declared scope or purpose.
 
 These invariants refine the design-level integrity rules of the approved foundation. They remain semantic conditions rather than executable validation algorithms.
 
@@ -560,13 +679,14 @@ These invariants refine the design-level integrity rules of the approved foundat
 
 The canonical meta-model is the conceptual source for concrete machine representation.
 
-A conforming representation shall be capable of representing the canonical constructs, references, cardinalities, and semantic distinctions defined here. In particular, it shall preserve the distinction between:
+A conforming representation shall be capable of representing the canonical constructs, membership roles, references, cardinalities, and semantic distinctions defined here. In particular, it shall preserve the distinction between:
 
 - declaration and reference;
-- containment and external reference;
+- membership/containment and semantic reference;
 - semantic identity and presentation identity;
 - ADL-owned and externally owned concepts;
 - semantic construct and extension;
+- external resource and preserved external snapshot;
 - logical model and concrete syntax.
 
 The representation shall participate in the bidirectional semantic mapping and round-trip integrity requirements established by the approved detailed-design foundation.
@@ -579,7 +699,7 @@ This section does not prescribe concrete field names, syntax, serialization tech
 |---|---|
 | Architecture Description | §§6, 16, 18 |
 | Stable semantic identity | §7 |
-| Architectural Elements | §8 |
+| Architectural Elements | §8, §§16–18 |
 | Architectural Relationships | §9, §§17–18 |
 | Architectural Constraints | §10, §§17–18 |
 | Architectural Assertions | §11, §§17–18 |
@@ -587,8 +707,9 @@ This section does not prescribe concrete field names, syntax, serialization tech
 | Viewpoints | §12 |
 | Views | §13, §§17–18 |
 | Context / external references | §14, §20 |
+| External reference integrity / preservation | §14, §§17, 19, 21–22 |
 | Extensions | §15, §17 |
-| Containment and reference semantics | §16 |
+| Containment, membership, and reference semantics | §6, §16 |
 | Cardinality and composition | §§17–18 |
 | Lifecycle / provenance | §19 |
 | Semantic ownership | §20 |
@@ -605,7 +726,7 @@ The following remain separate from this canonical meta-model:
 4. **Consistency model** — detailed machine-checkable invariant definitions.
 5. **Machine representation design** — concrete abstract representation structures, mapping rules, equivalence rules, and compatibility behavior.
 6. **ADL conformance model** — conformance subjects, requirements, and assessment boundaries.
-7. **Implementation contracts** — APIs, persistence, executable validation interfaces, and other implementation-specific contracts after design approval.
+7. **Implementation contracts** — APIs, persistence, executable validation interfaces, external-reference monitoring/preservation services, and other implementation-specific contracts after design approval.
 
 No deferred increment shall silently alter the ownership or cardinality rules established here; changes requiring architectural impact shall follow the applicable ECRA change process.
 
@@ -613,4 +734,4 @@ No deferred increment shall silently alter the ownership or cardinality rules es
 
 This document is the **ECRA-1200 Canonical ADL Meta-Model** and is submitted for review.
 
-Approval establishes the canonical conceptual structure for subsequent ECRA-1200 detailed-design increments. It does not authorize implementation of concrete serialization, storage, transport, validation, or proof behavior not defined by this document.
+Approval establishes the canonical conceptual structure for subsequent ECRA-1200 detailed-design increments. It does not authorize implementation of concrete serialization, storage, transport, validation, proof, monitoring, or archival behavior not defined by this document.
