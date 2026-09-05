@@ -284,6 +284,45 @@ Requirements / obligations
 
 **Goal:** Given a product page or product document, identify material product claims and compare them with manufacturer documentation and independent evidence.
 
+### 4.11 AI-Generated Content
+
+#### VS-AI01 — AI-Generated Response Evidence Review
+
+**Priority:** P2 / Future
+
+**User:** AI user, reviewer, researcher, or assurance analyst.
+
+**Goal:** Given an AI-generated response, identify substantive claims and determine which claims have available evidence that supports, contradicts, qualifies, or leaves them unresolved, then produce an auditable evidence report.
+
+**End-to-end flow:**
+
+```text
+AI-generated response
+    → identify substantive claims
+    → identify / retrieve relevant evidence
+    → associate evidence with claims
+    → assess support / contradiction / qualification / unresolved status
+    → preserve response and evidence provenance
+    → record limitations and uncertainty
+    → generate evidence-grounded report
+```
+
+This slice is intentionally deferred. It should be used later to evaluate ECRA against generated-content workflows without making AI-specific concerns part of the ECRA semantic core prematurely.
+
+When this slice is eventually analyzed, relevant application-level concerns may include:
+
+- generating system or model identity and version;
+- generation timestamp and response version;
+- prompt or contextual input provenance where appropriate;
+- distinction between generated content and human-authored content;
+- claim extraction from generated responses;
+- citation and evidence verification;
+- unverifiable or unsupported claims;
+- retrieval-augmented generation and associated evidence provenance;
+- automated versus human evidence assessment.
+
+These are future use-case analysis concerns, not current ECRA-1200 requirements or commitments. In particular, the slice shall not assume that model identity, prompts, generation metadata, or AI-specific abstractions belong in the ECRA semantic core until the applicable requirements and cross-slice evidence justify them.
+
 ## 5. Initial Prioritization
 
 The candidate portfolio is intentionally broader than the first implementation scope. The initial reference application should prioritize a small set that maximizes semantic diversity and reuse while remaining practical to demonstrate.
@@ -302,6 +341,8 @@ The recommended initial set is:
 
 The P0 portfolio should be treated as the initial proving portfolio. P1 and later slices should be added after the first core has demonstrated sufficient capability and after their incremental requirements are understood.
 
+VS-AI01 is intentionally classified as P2 / Future and is not part of the initial implementation commitment. It is retained in the portfolio so that the future generated-content evidence-review use case remains part of the durable reference-application planning baseline.
+
 This prioritization is subject to refinement during detailed use-case analysis.
 
 ## 6. Workflow Pattern Coverage
@@ -314,7 +355,7 @@ The portfolio deliberately includes several workflow orientations.
 Claim → Evidence → Assessment → Report
 ```
 
-Examples: VS-J01, VS-R01, VS-B01.
+Examples: VS-J01, VS-R01, VS-B01, VS-AI01.
 
 ### Evidence-first
 
@@ -507,22 +548,8 @@ Implementation behavior shall not become de facto normative semantics merely bec
 6. Continue the ECRA-1200 normative work, including the Normative Relationship Catalog, using the concrete slice requirements as an implementation-relevance input without allowing application concerns to redefine ECRA-1200 ownership.
 7. Implement the minimum reference core required for the first end-to-end slice.
 8. Build VS-J01 and VS-R01 as fully demonstrable UI-backed slices.
-9. Use the results to refine the core before implementing the remaining P0 slices.
-10. Maintain the coverage matrix and defer unsupported/speculative capabilities.
+9. Use the results to refine the core before implementing the next set of slices.
 
-## 16. Non-Goals
+## 16. Status
 
-This document does not:
-
-- define new ECRA semantic ownership;
-- define implementation technology choices;
-- define concrete serialization schemas;
-- define AI models or retrieval algorithms;
-- prescribe domain-specific truth judgments;
-- require all candidate slices to be implemented immediately;
-- require the reference implementation to implement every ECRA specification capability;
-- define production deployment architecture.
-
-## 17. Design Status
-
-This document captures the initial engineering portfolio and is intended to be reviewed before being treated as an approved implementation-planning baseline. The candidate portfolio may evolve as concrete slice specifications and capability analysis are developed.
+This document is a working implementation-planning baseline. The portfolio, priorities, and capability candidates shall be reviewed before they are treated as approved implementation commitments.
