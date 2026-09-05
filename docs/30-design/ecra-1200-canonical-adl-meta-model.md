@@ -1,6 +1,6 @@
 # ECRA-1200 — Canonical ADL Meta-Model
 
-> Status: REVIEW
+> Status: APPROVED
 > Authority: NORMATIVE
 > Generation: GEN1
 > Scope: Canonical conceptual meta-model for the ECRA Architecture Description Language
@@ -732,6 +732,6 @@ No deferred increment shall silently alter the ownership or cardinality rules es
 
 ## 25. Design Status
 
-This document is the **ECRA-1200 Canonical ADL Meta-Model** and is submitted for review.
+This document is the **ECRA-1200 Canonical ADL Meta-Model** and is **APPROVED**.
 
 Approval establishes the canonical conceptual structure for subsequent ECRA-1200 detailed-design increments. It does not authorize implementation of concrete serialization, storage, transport, validation, proof, monitoring, or archival behavior not defined by this document.
