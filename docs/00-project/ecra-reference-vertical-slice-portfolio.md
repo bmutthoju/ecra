@@ -36,6 +36,8 @@ A completed vertical slice shall exercise, as applicable:
 - machine representation and round-trip behavior where relevant;
 - generation of a meaningful user-facing result or report.
 
+For this portfolio, **round-trip behavior** means that an ECRA representation can be produced from the logical model and subsequently read back into a logically equivalent model. The reference implementation should preserve semantic identity, relationships, provenance, traceability, and other information required by the applicable ECRA contract. Byte-for-byte serialization equality is not implied.
+
 A vertical slice is complete only when the complete workflow can be demonstrated through the application, not merely when backend components have unit tests.
 
 ## 4. Initial Use-Case Families
@@ -409,7 +411,10 @@ The following capabilities are candidates for the shared reference core because 
 - uncertainty and limitations;
 - machine representation;
 - report generation;
-- user-visible inspection of claims, evidence, relationships, provenance, and assessment.
+- user-visible inspection of claims, evidence, relationships, provenance, and assessment;
+- user comments, observations, and decisions as evidence-bearing statements or claims where applicable.
+
+User-provided comments or decisions may themselves be analyzed as claims or decision-related assertions and may be supported, contradicted, qualified, or left unresolved by evidence. This enables the same evidence-analysis workflow to process user input rather than limiting evidence review to the original source material. This is an application/reference-implementation capability consideration, not a new ECRA semantic root type.
 
 These are candidate capabilities, not yet implementation commitments. Their final inclusion shall be determined through detailed analysis of the selected slices and the applicable normative specifications.
 
@@ -511,45 +516,47 @@ The matrix shall identify implemented, partial, deferred, and intentionally excl
 
 The initial P0 portfolio is not a permanent limit.
 
-After the initial slices are operational, additional slices shall be added when they provide meaningful evidence about:
+Additional slices shall be introduced when they provide meaningful new semantic, interoperability, provenance, traceability, validation, or usability requirements.
 
-- uncovered semantic capabilities;
-- different information-flow patterns;
-- new provenance requirements;
-- new traceability patterns;
-- representation/interoperability behavior;
-- scalability or robustness;
-- domain neutrality;
-- limitations or weaknesses in the current reference core.
+When a new slice requires a capability already present in another slice, the implementation should reuse the existing capability rather than introduce a parallel mechanism.
 
-New slices should first be analyzed for their incremental requirements. A new capability should be generalized into the core only when there is sufficient evidence that doing so is justified.
+When multiple slices expose a recurring requirement that is not adequately supported by the current core, the requirement should be analyzed before generalizing the capability into the shared reference implementation.
 
-## 14. Relationship to ECRA Specifications
+The reference implementation should therefore evolve from demonstrated cross-slice evidence rather than from speculative architectural expansion.
 
-Vertical slices shall consume ECRA semantics; they shall not silently redefine them.
+## 14. Specification Feedback Loop
 
-Where a vertical slice exposes an ambiguity, missing rule, or inconsistency in an ECRA specification:
+The vertical slices are also an engineering feedback mechanism for the ECRA specifications.
 
-1. record the observation;
-2. determine whether it is an implementation issue or specification issue;
-3. correct the authoritative specification when required;
-4. update the implementation contract;
-5. update the reference implementation and slice tests.
+A slice may reveal:
 
-Implementation behavior shall not become de facto normative semantics merely because it was implemented first.
+- ambiguous normative language;
+- missing semantic constructs;
+- insufficient relationship definitions;
+- inadequate provenance requirements;
+- representation or interchange limitations;
+- validation or verification gaps;
+- usability problems in applying the specifications;
+- unnecessary complexity.
 
-## 15. Immediate Next Steps
+Such findings shall be recorded and routed through the appropriate ECRA specification change process rather than being silently resolved by application-specific behavior.
 
-1. Review and approve this initial vertical-slice portfolio.
-2. Develop detailed specifications for the P0 slices, beginning with VS-J01 and VS-R01 because they directly instantiate the core claim → evidence → report workflow.
-3. Derive the cross-slice capability matrix from the P0 portfolio.
-4. Identify the minimum reference-core capability set.
-5. Establish the reference application architecture and UI boundary.
-6. Continue the ECRA-1200 normative work, including the Normative Relationship Catalog, using the concrete slice requirements as an implementation-relevance input without allowing application concerns to redefine ECRA-1200 ownership.
-7. Implement the minimum reference core required for the first end-to-end slice.
-8. Build VS-J01 and VS-R01 as fully demonstrable UI-backed slices.
-9. Use the results to refine the core before implementing the next set of slices.
+The reference implementation shall not redefine normative ECRA semantics merely to make a particular slice easier to implement.
+
+## 15. Non-Goals
+
+This document does not:
+
+- define new ECRA semantic concepts;
+- replace the ECRA normative specifications;
+- prescribe a particular programming language, framework, database, or deployment topology;
+- require implementation of the complete ECRA specification portfolio;
+- define production deployment architecture for arbitrary organizations;
+- define domain-specific legal, theological, journalistic, scientific, or regulatory truth criteria;
+- make AI-specific metadata or abstractions part of the ECRA semantic core.
+
+The purpose of this portfolio is to keep the reference implementation grounded in demonstrable user value and evidence-driven engineering.
 
 ## 16. Status
 
-This document is a working implementation-planning baseline. The portfolio, priorities, and capability candidates shall be reviewed before they are treated as approved implementation commitments.
+This document is **REVIEW** and serves as the current engineering baseline for selecting and analyzing ECRA reference-application vertical slices. It may evolve as detailed slice analysis produces new implementation evidence.
