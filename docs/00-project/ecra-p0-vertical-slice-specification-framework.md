@@ -305,6 +305,10 @@ When detailed slice analysis reveals that a capability is:
 - useful only to one slice, it should normally remain application-specific;
 - reusable across multiple slices, its potential promotion into the shared core shall be evaluated explicitly.
 
+The capability matrix shall be versioned as the implementation evidence base evolves. Each material refinement shall produce a new matrix version, with the change rationale, triggering vertical slice(s), implementation status, and relevant verification evidence recorded. This version history shall make progress and capability evolution visible after each vertical slice is specified, implemented, and verified.
+
+The versioned matrix is the authoritative engineering record of the evolving reference-implementation capability baseline; individual slice specifications shall reference the matrix version against which their capability analysis was performed.
+
 This establishes a controlled feedback loop:
 
 ```text
@@ -312,7 +316,7 @@ P0 Slice Specification
         ↓
 Capability Evidence
         ↓
-Capability Matrix Refinement
+Versioned Capability Matrix
         ↓
 Reference-Core Design
         ↓
