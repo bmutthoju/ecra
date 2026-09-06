@@ -1,6 +1,6 @@
 # ECRA Reference Application — P0 Vertical Slice Specification Framework
 
-> Status: REVIEW
+> Status: APPROVED
 > Authority: ENGINEERING / INFORMATIVE
 > Generation: GEN1
 > Scope: Common specification framework for detailed P0 vertical-slice specifications
@@ -397,4 +397,4 @@ Acceptance / Verification Evidence
 
 ## 11. Status
 
-This framework is submitted for review. It establishes the common structure for the detailed P0 vertical-slice specifications and does not itself constitute an implementation commitment beyond the approved capability-planning boundaries.
+This framework is **APPROVED**. It establishes the common structure for the detailed P0 vertical-slice specifications and does not itself constitute an implementation commitment beyond the approved capability-planning boundaries.
