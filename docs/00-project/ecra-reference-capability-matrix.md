@@ -1,6 +1,6 @@
 # ECRA Reference Implementation — Cross-Slice Capability Matrix
 
-> Status: REVIEW
+> Status: APPROVED
 > Authority: ENGINEERING / INFORMATIVE
 > Generation: GEN1
 > Scope: Derivation of reference-implementation capabilities from the approved vertical-slice portfolio
