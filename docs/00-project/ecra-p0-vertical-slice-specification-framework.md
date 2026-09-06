@@ -9,7 +9,7 @@
 
 This document establishes the common specification framework that shall be used to define the selected P0 vertical slices in sufficient detail for implementation planning, reference-implementation design, UI development, and end-to-end verification.
 
-It is an implementation-planning artifact. It does not create new ECRA semantic requirements, alter normative ownership, or commit the reference implementation to a particular technology stack or deployment architecture.
+It is an implementation-planning artifact. It does not introduce new ECRA semantic requirements, alter normative ownership, or commit the reference implementation to a particular technology stack or deployment architecture.
 
 ## 2. Source Basis
 
@@ -305,7 +305,7 @@ When detailed slice analysis reveals that a capability is:
 - useful only to one slice, it should normally remain application-specific;
 - reusable across multiple slices, its potential promotion into the shared core shall be evaluated explicitly.
 
-This creates a controlled feedback loop:
+This establishes a controlled feedback loop:
 
 ```text
 P0 Slice Specification
