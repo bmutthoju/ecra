@@ -256,7 +256,98 @@ The following remain deferred unless a selected slice or later evidence establis
 
 Deferral does not prohibit future implementation. It preserves the evidence-driven boundary.
 
-## 12. Implementation Coverage Matrix Contract
+## 12. Evolutionary Architecture and Deferred Capability Implementability
+
+Deferral is an implementation-scope decision, not permission to introduce architectural coupling that makes future evolution unnecessarily expensive.
+
+The reference implementation shall therefore be designed so that deferred capabilities can be introduced, replaced, or decomposed with minimal **avoidable** rework where reasonably foreseeable. This does not require predicting the final architecture or guaranteeing that every future capability can be added with little change.
+
+The implementation should, as appropriate:
+
+- maintain explicit responsibilities and cohesive component boundaries;
+- define stable, technology-independent contracts between major capabilities;
+- depend on replaceable abstractions/interfaces rather than concrete infrastructure where this materially improves replaceability;
+- apply dependency inversion and other appropriate SOLID principles;
+- use established design patterns where they simplify evolution rather than adding abstraction speculatively;
+- avoid unnecessary coupling between persistence, messaging, external integrations, processing components, and application services;
+- keep semantic contracts and core data models independent of deployment topology;
+- isolate infrastructure-specific concerns from domain/semantic behavior;
+- preserve clear boundaries between shared reference-core capabilities and application-specific behavior.
+
+The reference implementation does **not** need to adopt a distributed or microservice architecture now. Distributed deployment is a possible future evolution path. The current architecture should nevertheless avoid decisions that would make later decomposition into separate processes or services require avoidable changes to ECRA semantic contracts or core responsibilities.
+
+This principle applies equally to other deferred capabilities: future promotion should preferably occur through composition, extension, replacement, or decomposition of well-bounded components rather than invasive restructuring.
+
+## 13. Capability Promotion Lifecycle
+
+A capability that is initially deferred shall have an explicit mechanism for promotion when subsequent evidence establishes that it should be implemented.
+
+The promotion lifecycle is:
+
+```text
+Deferred
+   ↓
+Candidate
+   ↓
+Evidence Collected
+   ↓
+Qualified
+   ↓
+Approved for Implementation
+   ↓
+Implemented
+   ↓
+Verified
+```
+
+The following transitions are also permitted where justified:
+
+```text
+Candidate → Rejected / Remains Deferred
+Implemented → Retired
+```
+
+### 13.1 Promotion triggers
+
+A deferred capability may become a Candidate when one or more of the following provide credible evidence:
+
+1. a selected or newly approved vertical slice cannot be implemented correctly without it;
+2. an approved normative ECRA requirement requires it;
+3. it becomes necessary enabling infrastructure for an already justified capability;
+4. multiple vertical slices demonstrate a reusable need that warrants promotion into the shared core;
+5. implementation evidence demonstrates a material architectural or operational need that was not reasonably foreseeable during initial planning.
+
+### 13.2 Qualification evidence
+
+Before approval for implementation, the promotion record should establish, as applicable:
+
+- the triggering vertical slice(s) or normative requirement(s);
+- the capability definition and proposed boundary;
+- the rationale for promotion;
+- dependency and architectural impact;
+- reuse assessment across existing and expected slices;
+- whether the capability belongs in the shared reference core or an application layer;
+- impact on existing semantic and implementation contracts;
+- acceptance and verification criteria;
+- the approval decision and decision authority.
+
+Qualification does not automatically require promotion into the shared core. A capability may be qualified but implemented at the application layer, or remain deferred pending broader evidence.
+
+### 13.3 Recording promotion decisions
+
+Promotion decisions shall be recorded in the implementation coverage matrix and, where the architectural impact is material, in the applicable implementation/design record.
+
+The coverage model should therefore track at least:
+
+- lifecycle state;
+- promotion evidence or decision basis;
+- architectural impact;
+- implementation placement (shared core or application layer);
+- verification status.
+
+Promotion is evidence-driven and reversible. A capability may later be retired, moved between core and application boundaries, or returned to a deferred state when subsequent evidence justifies the change.
+
+## 14. Implementation Coverage Matrix Contract
 
 The matrix shall evolve into a traceable implementation coverage model with, at minimum, these dimensions:
 
@@ -271,11 +362,14 @@ The matrix shall evolve into a traceable implementation coverage model with, at 
 | UI demonstration | Identifies the user-visible demonstration |
 | Verification | Identifies test/verification evidence |
 | Status | Tracks planned, implemented, verified, deferred, or retired state |
-| Rationale | Records why the capability is included or excluded |
+| Lifecycle state | Tracks deferred, candidate, evidence collected, qualified, approved, implemented, verified, rejected, or retired state |
+| Promotion evidence / decision | Records why a deferred capability was promoted, retained, or rejected |
+| Architectural impact | Records material architectural consequences of the capability decision |
+| Rationale | Records why the capability is included, excluded, or placed at a particular layer |
 
 This structure is intended to prevent both under-implementation of demonstrated requirements and speculative expansion of the reference core.
 
-## 13. Derivation Rules for New Capabilities
+## 15. Derivation Rules for New Capabilities
 
 A new reference-implementation capability shall be admitted only when one of the following is demonstrated:
 
@@ -288,7 +382,9 @@ A capability that is useful for only one application should remain at the applic
 
 A capability justified only by hypothetical future use shall be recorded as deferred rather than implemented speculatively.
 
-## 14. Next Increment
+When a deferred capability meets one or more admission criteria, it shall enter the Capability Promotion Lifecycle defined in §13. The lifecycle record shall provide the evidence and approval necessary to determine whether it is implemented in the shared core, implemented at the application layer, remains deferred, or is rejected.
+
+## 16. Next Increment
 
 The next implementation-planning increment should be **Detailed P0 Vertical Slice Specifications**.
 
@@ -310,6 +406,6 @@ Each P0 slice should be specified with:
 
 The detailed slice specifications should then be used to refine this matrix before implementation of the minimum reference core begins.
 
-## 15. Status
+## 17. Status
 
 This document is submitted for review. Its contents are intended to provide an implementation-planning baseline for subsequent P0 vertical-slice specification work and shall not be interpreted as new normative ECRA requirements.
