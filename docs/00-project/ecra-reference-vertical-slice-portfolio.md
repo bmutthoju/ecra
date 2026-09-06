@@ -1,6 +1,6 @@
 # ECRA Reference Application — Vertical Slice Portfolio
 
-> Status: REVIEW
+> Status: APPROVED
 > Authority: ENGINEERING / INFORMATIVE
 > Generation: GEN1
 > Scope: Reference-application use cases and implementation-driving vertical slices
@@ -559,4 +559,4 @@ The purpose of this portfolio is to keep the reference implementation grounded i
 
 ## 16. Status
 
-This document is **REVIEW** and serves as the current engineering baseline for selecting and analyzing ECRA reference-application vertical slices. It may evolve as detailed slice analysis produces new implementation evidence.
+This document is **APPROVED** and serves as the current engineering baseline for selecting and analyzing ECRA reference-application vertical slices. It may evolve as detailed slice analysis produces new implementation evidence.
