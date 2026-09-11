@@ -180,7 +180,7 @@ The application shall distinguish the source as the origin or attribution contex
 
 ### 3.3 Step 2 — Register source and artifact
 
-The system creates or resolves:
+The system generates or resolves:
 
 - source identity;
 - acquired artifact identity;
@@ -239,7 +239,7 @@ For each selected evidence item, the system records, as applicable:
 
 ### 3.8 Step 7 — Associate evidence with claims
 
-The system creates an explicit typed association between each evidence item and each claim for which the evidence is materially relevant.
+The system establishes an explicit typed association between each evidence item and each claim for which the evidence is materially relevant.
 
 The relationship shall be independently traversable from claim to evidence and, where supported by canonical inverse rules, from evidence to claim.
 
@@ -349,7 +349,7 @@ Each evidence item shall:
 
 ### 4.4 Reviewer input
 
-Reviewer comments, corrections, and observations are application-level inputs. Where a reviewer statement materially participates in the evidence analysis, the application may represent it using applicable claim/assertion semantics rather than creating a new ECRA root type.
+Reviewer comments, corrections, and observations are application-level inputs. Where a reviewer statement materially participates in the evidence analysis, the application may represent it using applicable claim/assertion semantics rather than introducing a new ECRA root type.
 
 A reviewer comment shall not become authoritative merely because it was entered into the application.
 
@@ -387,7 +387,7 @@ Detailed normative multiplicities shall defer to the applicable ECRA relationshi
 
 ### 5.4 Relationship provenance
 
-Material relationship creation, modification, or assessment shall retain sufficient provenance to identify its origin and, where relevant, the reviewer or processing step responsible.
+Material relationship establishment, modification, or assessment shall retain sufficient provenance to identify its origin and, where relevant, the reviewer or processing step responsible.
 
 ## 6. Evidence and Assessment Requirements
 
@@ -621,7 +621,7 @@ The report shall identify unresolved claims rather than omitting them.
 
 | Case | Required behavior |
 |---|---|
-| No source material | Reject intake with explicit error; do not create a successful fact-check result |
+| No source material | Reject intake with explicit error; do not produce a successful fact-check result |
 | Unsupported/malformed artifact | Report processing failure; preserve available acquisition/error provenance |
 | No claims identified | Permit explicit empty/incomplete review state; do not fabricate claims |
 | Candidate claim is opinion/prediction rather than factual proposition | Allow reviewer to exclude or classify outside this slice; do not force factual assessment |
@@ -938,7 +938,7 @@ Verify that the logical input/output contracts, semantic object identities, requ
 
 ### 18.2 Integration verification
 
-Verify that source intake, claim representation, evidence representation, relationship creation, provenance, assessment, and report generation operate together through the reference application.
+Verify that source intake, claim representation, evidence representation, relationship establishment, provenance, assessment, and report generation operate together through the reference application.
 
 ### 18.3 Negative verification
 
