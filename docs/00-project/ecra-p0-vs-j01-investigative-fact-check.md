@@ -972,6 +972,18 @@ The comparison shall concern semantic equivalence, including required identities
 
 At least one representative complete fact-check scenario shall be executed through the reference application UI, including source intake, claim review, evidence review, assessment, traceability inspection, and report generation.
 
+
+### 18.8 Local API packaging prerequisite
+
+Before running the local API packaging command, the project's Node.js dependencies shall be installed. The local packaging workflow shall therefore run:
+
+```bash
+npm install
+npm run package:local-api
+```
+
+Running `npm run package:local-api` without first running `npm install` is not a supported clean-environment workflow.
+
 ## 19. Deliverable and Completion Definition
 
 VS-J01 is complete only when the following artifacts/evidence exist:
