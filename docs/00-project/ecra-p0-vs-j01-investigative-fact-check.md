@@ -84,7 +84,7 @@ A representative input may contain a mixture of:
 - claims for which evidence is incomplete or conflicting;
 - statements that appear factual but are actually opinion, prediction, interpretation, or rhetorical language.
 
-The application shall allow the reviewer to distinguish claims selected for fact checking from content that is outside the factual-evaluation scope of the slice.
+The application shall allow the reviewer to distinguish claims selected for fact checking from content that is outside the factual-evaluation scope of the slice. The reviewer may select a portion of source text for factual evaluation through the UI; this selection interaction is an application/UI concern and shall not require a specialized claim-selection capability in the ECRA semantic core or backend services. The resulting selected span shall be represented using the normal claim and source-location semantics.
 
 ### 2.2 Required inputs
 
@@ -92,7 +92,7 @@ The minimum required user input is source material containing one or more candid
 
 The source material shall be representable as an acquired artifact with sufficient source and provenance information for the supported workflow.
 
-The application shall not require that all claims be automatically identified before the workflow can continue. Human identification or correction shall remain possible.
+The application shall not require that all claims be automatically identified before the workflow can continue. Human identification or correction shall remain possible. Human corrections that materially affect a claim shall be evidence-backed or explicitly recorded as requiring evidence before the corrected claim is treated as established.
 
 ### 2.3 Optional inputs
 
@@ -102,12 +102,12 @@ The workflow may accept, where available:
 - known source URLs or locators;
 - publication date or revision information;
 - author or publisher information;
-- user-specified claims to prioritize;
+- user-specified claims to prioritize or select portions of source text for evaluation;
 - candidate evidence sources supplied by the user;
 - contextual information relevant to interpreting a claim;
 - reviewer comments or notes.
 
-Optional information shall not be represented as established fact merely because it was supplied by a user.
+Optional information shall not be represented as established fact merely because it was supplied by a user. Optional user-supplied information shall be eligible for representation as a claim/assertion when it is a substantive proposition; it shall not acquire evidentiary status merely from being supplied. If such a claim/assertion participates in evaluation, it shall be subject to the same evidence and assessment rules as other claims.
 
 ### 2.4 Preconditions
 
@@ -123,7 +123,7 @@ Before evaluation of a claim:
 
 ### 2.5 Input-quality assumptions
 
-The slice shall explicitly tolerate imperfect inputs. Source material may be incomplete, ambiguous, duplicated, malformed, unavailable, revised, or inaccessible.
+The slice shall explicitly tolerate imperfect inputs. Source material may be incomplete, ambiguous, duplicated, malformed, unavailable, revised, or inaccessible. Partial valid inputs may still enter evaluation for the portions that satisfy the evaluation boundary, provided the system clearly identifies input-quality limitations and does not imply that unavailable or invalid portions were evaluated.
 
 The application shall distinguish:
 
@@ -189,7 +189,7 @@ The system establishes or resolves:
 - acquisition/provenance information;
 - applicable integrity information.
 
-Source authenticity and source authority shall be represented separately when such information is available.
+Source authenticity and source authority shall be represented separately when such information is available. User-supplied source metadata may itself be represented as a claim/assertion when it is a substantive proposition; it shall not be treated as the source of the underlying information merely because the user supplied it.
 
 ### 3.4 Step 3 — Identify candidate claims
 
@@ -197,7 +197,7 @@ Candidate factual claims may be identified by an application-level extraction ca
 
 Claim extraction is not itself an ECRA semantic capability. The resulting claim is represented using the applicable ECRA claim semantics.
 
-The reviewer shall be able to inspect the extracted claim and correct its text, boundaries, or selection before evaluation.
+The reviewer shall be able to inspect the extracted claim and correct its text, boundaries, or selection before evaluation. A human correction or selection that materially changes the proposition or evaluation scope shall record who/what made the change, when it was made, the prior state, the new state, and the justification; the changed claim shall be evaluated using the same evidence-backed evaluation rules as any other claim.
 
 Where a source sentence contains multiple materially distinct propositions, the application should permit separate claim representations where doing so improves evidence traceability and assessment clarity.
 
@@ -211,7 +211,7 @@ The system shall not treat an incomplete claim as successfully evaluated.
 
 ### 3.6 Step 5 — Identify relevant evidence
 
-The application may support user-provided evidence, application-assisted discovery, or another replaceable evidence-discovery mechanism.
+The application may support user-provided evidence, application-assisted discovery, or another replaceable evidence-discovery mechanism. Evidence discovery may identify a source through a chain of claims and evidence; the application shall preserve that derivation path and shall not treat the existence of the chain as proof that every intermediate claim is fully supported.
 
 The discovery mechanism is not part of the ECRA semantic core. The output of discovery is one or more identifiable evidence items that can be associated explicitly with a claim.
 
@@ -243,11 +243,11 @@ The system establishes an explicit typed association between each evidence item 
 
 The relationship shall be independently traversable from claim to evidence and, where supported by canonical inverse rules, from evidence to claim.
 
-The relationship shall not be inferred solely from co-location, search results, or storage structure.
+The relationship shall not be inferred solely from co-location, search results, or storage structure. When evidence is discovered through an intermediate claim/evidence chain, the chain shall remain explicitly traversable, with each intermediate claim/evidence relationship independently assessable. A source reached through such a chain shall be identified as chain-derived rather than presented as directly established solely by the chain.
 
 ### 3.9 Step 8 — Assess evidence relationship
 
-The reviewer or applicable evaluation mechanism determines how the evidence bears on the claim.
+The reviewer or applicable evaluation mechanism determines how the evidence bears on the claim. Human evaluation is subject to the same requirement for evidence-backed reasoning as automated or application-assisted evaluation; a reviewer conclusion shall not become authoritative solely because a human entered it.
 
 The slice shall support the approved assessment distinctions needed by the workflow, including:
 
@@ -297,6 +297,8 @@ The application generates a fact-check report containing, at minimum:
 - the fact-check subject/source;
 - selected claims;
 - claim text and source location;
+- selected and excluded text portions, with the reason for any material exclusion;
+- ambiguity or multiple-interpretation information where a fair evaluation requires additional context;
 - evidence items and source information;
 - claim/evidence relationship(s);
 - assessment result;
@@ -467,7 +469,9 @@ The slice shall preserve, as applicable:
 - evaluation context identity/version;
 - applicable evaluation rule/policy identity/version;
 - processing/transformation history;
-- relevant user actions.
+- relevant user actions;
+- claim/selection/correction version and lineage information;
+- justification for material user corrections or exclusions.
 
 ### 7.2 Source locations
 
@@ -484,7 +488,7 @@ Examples of application-level location forms include, as applicable:
 - quoted passage boundaries;
 - web-resource locator plus retrieved artifact state.
 
-The application shall preserve the location semantics appropriate to the acquired artifact without making these examples universal ECRA types.
+The application shall preserve the location semantics appropriate to the acquired artifact without making these examples universal ECRA types. The UI shall allow the reviewer to open or otherwise read the originating source or acquired artifact associated with a claim or evidence item, subject to applicable access restrictions.
 
 ### 7.3 Traceability traversal
 
@@ -503,9 +507,9 @@ Where canonical inverse relationships are available, reverse traversal shall als
 
 ### 7.4 Historical preservation
 
-Once a fact-check result is released or baselined, its material basis shall remain reconstructable even if later revisions occur to source material, evidence, context, or evaluation rules.
+Once a fact-check result is released or baselined, its material basis shall remain reconstructable even if later revisions occur to source material, evidence, context, or evaluation rules. Source/artifact revisions shall preserve prior versions or sufficient historical copies/lineage to reconstruct the earlier basis where permitted by access, licensing, and retention constraints. Claim selections, corrections, and assessments shall likewise be versioned rather than silently discarded, with lineage from the prior state to the revised state.
 
-The slice does not define a general version-control platform; it demonstrates the minimum preservation required by the approved Gen1 contracts.
+The application may maintain versioned copies of acquired sources or artifacts for future reference where permitted. The slice does not define a general version-control platform; it demonstrates the minimum preservation required by the approved Gen1 contracts.
 
 ## 8. Input / Output Contracts
 
@@ -558,7 +562,7 @@ FactCheckResult
 
 ### 8.4 Incomplete result
 
-The system shall support a result that is explicitly incomplete when one or more material claims remain unresolved, evidence is unavailable, or processing fails for part of the workflow.
+The system shall support a result that is explicitly incomplete when one or more material claims remain unresolved, evidence is unavailable, or processing fails for part of the workflow. Valid portions of partially available input may still be evaluated, while the result explicitly identifies the portions not evaluated and the quality limitations affecting interpretation.
 
 An incomplete result is not a failed claim evaluation and shall not be silently converted into a negative assessment.
 
@@ -615,7 +619,7 @@ The user shall be able to distinguish:
 
 The report view shall permit the reviewer to move from a reported claim to its supporting material and assessment basis without leaving the reference application workflow.
 
-The report shall identify unresolved claims rather than omitting them.
+The report shall identify unresolved claims rather than omitting them. Where evidence does not fully support a claim, the UI/report shall make that limitation clear rather than presenting the claim as fully established. Where a portion of a candidate claim was excluded, the output shall preserve the excluded portion and explain the exclusion so that the surrounding context is not lost. Where a claim is materially ambiguous and cannot be fairly evaluated without additional context, the system shall identify the ambiguity and may present plausible interpretations as an explicit option for reviewer selection rather than silently choosing one.
 
 ## 10. Negative and Boundary Cases
 
@@ -624,24 +628,24 @@ The report shall identify unresolved claims rather than omitting them.
 | No source material | Reject intake with explicit error; do not produce a successful fact-check result |
 | Unsupported/malformed artifact | Report processing failure; preserve available acquisition/error provenance |
 | No claims identified | Permit explicit empty/incomplete review state; do not fabricate claims |
-| Candidate claim is opinion/prediction rather than factual proposition | Allow reviewer to exclude or classify outside this slice; do not force factual assessment |
+| Candidate claim is opinion/prediction rather than factual proposition | Allow reviewer to exclude or classify outside this slice; preserve the excluded text and reason where exclusion affects interpretation; do not force factual assessment |
 | Claim lacks minimum evaluation information | Mark ineligible/incomplete and provide reason |
 | No evidence found | Preserve claim as unresolved/insufficient evidence; do not infer contradiction |
 | Evidence source inaccessible | Preserve evidence/reference state as unavailable where supported; do not silently discard the relationship |
 | Evidence conflicts with other evidence | Preserve distinct evidence relationships and expose conflict; do not collapse without an explicit assessment basis |
 | Evidence duplicates another item | Preserve identity/lineage and allow deduplication handling without losing provenance |
-| Source changes after acquisition | Preserve acquired artifact/version state and historical provenance; do not silently rewrite the prior evaluation basis |
+| Source changes after acquisition | Preserve acquired artifact/version state and historical provenance; maintain prior versions or historical copies where permitted; do not silently rewrite the prior evaluation basis |
 | Source authenticity cannot be established | Represent authenticity as unknown/unavailable as supported; do not infer inauthenticity |
 | Source is authentic but authority is uncertain | Preserve authenticity and authority separately |
 | Integrity check succeeds | Preserve integrity result; do not treat it as proof of claim truth |
 | Source location ambiguous | Mark location limitation and retain enough provenance for the reviewer to understand the gap |
 | Claim/evidence relationship invalid | Reject or quarantine the invalid relationship; do not use it in a successful assessment |
 | Provenance incomplete | Mark the affected result incomplete or limited; do not silently invent provenance |
-| Automated claim extraction incorrect | Allow reviewer correction/removal and preserve material processing provenance where applicable |
+| Automated claim extraction incorrect | Allow reviewer correction/removal, preserve prior and revised claim states, record the justification for material corrections/selections, and preserve material processing provenance where applicable |
 | Automated evidence suggestion incorrect | Allow reviewer rejection; do not treat suggestion as accepted evidence association |
 | Partial processing failure | Preserve successfully processed material and explicitly identify failed portions |
-| User changes a claim after assessment | Invalidate or supersede the affected assessment as required by lifecycle semantics; do not silently leave a stale result attached to materially changed claim content |
-| Later revision of source/evidence | Preserve historical result and establish lineage to the later revision |
+| User changes a claim after assessment | Version the prior and revised claim states and preserve the prior assessment; invalidate or supersede the affected current assessment as required by lifecycle semantics; do not silently discard history or leave a stale result attached to materially changed claim content |
+| Later revision of source/evidence | Preserve historical result, prior source/evidence version or sufficient historical copy where permitted, and establish lineage to the later revision |
 | Machine round-trip | Read-back model shall remain logically equivalent and preserve required identity, relationships, provenance, and traceability |
 
 ## 11. Acceptance Criteria
@@ -664,7 +668,7 @@ Each evidence item has stable identity and retains applicable version or lineage
 
 ### AC-J01-05 — Explicit evidence association
 
-A reviewer can inspect the explicit association between a claim and each evidence item used for its evaluation.
+A reviewer can inspect the explicit association between a claim and each evidence item used for its evaluation, including whether the evidence was obtained directly or through a claim/evidence chain.
 
 ### AC-J01-06 — Source distinction
 
@@ -725,6 +729,22 @@ The generated report identifies all selected claims, including unresolved claims
 ### AC-J01-20 — UI completeness
 
 All required stages of the workflow are demonstrable through the reference application UI rather than only through backend tests.
+
+### AC-J01-21 — Selection and context preservation
+
+The reviewer can select a portion of source text for evaluation through the UI, and any materially excluded portion is preserved in the output with an explanation sufficient to retain context.
+
+### AC-J01-22 — Evidence-backed human review
+
+Material human corrections, selections, and evaluation conclusions are versioned with justification and are subject to the same evidence-backed assessment rules as other claims and evaluations.
+
+### AC-J01-23 — Chain-aware evidence provenance
+
+When a source or evidence item is reached through a claim/evidence chain, the system preserves the chain, identifies the chain-derived source/evidence, and exposes the assessment state of intermediate claims rather than implying that the chain itself establishes every intermediate proposition.
+
+### AC-J01-24 — Source access and ambiguity transparency
+
+The reviewer can open/read the originating source or acquired artifact where access permits; the UI/report clearly identifies incomplete support, ambiguity, excluded portions, and applicable input-quality limitations.
 
 ## 12. Reference-Core versus Application Responsibilities
 
