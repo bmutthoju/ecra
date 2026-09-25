@@ -811,6 +811,7 @@ The following table records the VS-J01 evidence against the current approved cap
 | Verification integration boundary | E | 2 | Acceptance/verification evidence must connect to slice | Shared core integration boundary |
 | Deterministic validation of required input structure | D | 1/2 | Claim eligibility and input validation | Shared core contract + application validation |
 | Reproducible processing record | E | 2 | Required to support reproducibility and replay | Shared enabling infrastructure |
+| Durable historical storage/reconstruction | E | 2 | Required to preserve released/baselined results under the reference implementation's storage SLA | Shared enabling infrastructure |
 | Generic search engine | — | 3 | Explicitly out of scope | Deferred |
 | Universal reasoning engine | — | 3 | Explicitly out of scope | Deferred |
 | Generic ontology inference | — | 3 | Explicitly out of scope | Deferred |
@@ -850,13 +851,17 @@ Material provenance records shall be protected against silent alteration. Releas
 
 The application shall preserve sufficient processing and input state to reproduce representative results under equivalent conditions.
 
-### 14.5 External dependencies
+### 14.5 Storage durability and historical reconstruction
+
+Persistence of released or baselined fact-check records shall meet the durability and availability requirements established for the reference implementation. The implementation shall use appropriate durability mechanisms, such as redundancy/replication, recoverable historical copies, or deterministic reconstruction from retained source/derived material, so that required historical results are not dependent on a single mutable storage instance. The concrete storage SLA and mechanism belong to the implementation/operational design and shall not be invented by this slice specification.
+
+### 14.6 External dependencies
 
 Evidence discovery and source acquisition may depend on external services. The slice shall isolate such dependencies behind replaceable interfaces or application-level boundaries and shall preserve the identity/provenance of the resulting material.
 
 No specific external search provider is required by this specification.
 
-### 14.6 Failure isolation and observability
+### 14.7 Failure isolation and observability
 
 The application shall make partial failures observable and shall avoid allowing an external acquisition or processing failure to silently corrupt an existing semantic record.
 
