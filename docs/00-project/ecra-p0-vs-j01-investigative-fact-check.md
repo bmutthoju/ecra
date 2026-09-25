@@ -1,6 +1,6 @@
 # ECRA Reference Application — VS-J01 Investigative Fact Check
 
-> Status: REVIEW
+> Status: APPROVED
 > Authority: ENGINEERING / INFORMATIVE
 > Generation: GEN1
 > Scope: Detailed P0 vertical-slice specification for the Investigative Fact Check workflow
