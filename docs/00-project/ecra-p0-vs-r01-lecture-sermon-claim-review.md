@@ -1,6 +1,6 @@
 # ECRA Reference Application — VS-R01 Lecture or Sermon Claim Review
 
-> Status: REVIEW
+> Status: APPROVED
 > Authority: ENGINEERING / INFORMATIVE
 > Generation: GEN1
 > Scope: Detailed P0 vertical-slice specification for Lecture or Sermon Claim Review
@@ -1243,4 +1243,4 @@ These items shall be resolved only when implementation evidence or an authoritat
 
 ## 21. Status
 
-This specification is currently **REVIEW** and is intended for review before implementation of the VS-R01 reference-application vertical slice.
+This specification is **APPROVED** and is intended to drive the VS-R01 reference-application implementation and its supporting verification evidence.
