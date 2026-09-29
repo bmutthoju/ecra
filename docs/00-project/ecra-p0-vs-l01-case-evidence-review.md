@@ -250,6 +250,8 @@ Relevant evidence may include:
 
 Evidence discovery may be assisted by application functionality, but material evidence associations shall remain explicit and inspectable.
 
+Where the review model characterizes evidentiary strength, that characterization shall be explicit, traceable, and supported by the available provenance and evidence. An attributed statement, eyewitness account, or word-of-mouth report shall not be treated as strong evidence merely because it exists or is attributed. Evidence that has stronger evidentiary support within the declared review criteria may include a verified recording, authentic source material, or information derived through a valid logical or mathematical proof. The report shall transparently identify the evidence basis, relevant verification or derivation, and any limitations rather than presenting evidence strength as an unqualified property of an evidence type.
+
 ### 3.6 Claim/Evidence Association
 
 The implementation shall support:
@@ -295,7 +297,9 @@ The assessment is an evidence-review result within the declared scope. It is not
 
 Reviewers may correct extracted claims, add claims, change evidence associations, identify missing documents, mark ambiguity, revise assessments, and add review notes.
 
-Material changes shall preserve reviewer identity where available, timestamp, prior state, revised state, justification, supporting evidence where applicable, and provenance.
+A material reviewer correction or justification shall be represented as a reviewer-originated claim/assertion with explicit provenance rather than as an unqualified state change. The correction claim shall identify the prior and revised state where applicable. Its justification may itself contain one or more claims and shall be assessed against supporting evidence where applicable.
+
+Material changes shall preserve reviewer identity where available, timestamp, prior state, revised state, justification, supporting evidence where applicable, assessment state, and provenance. Reviewer-generated claims, corrections, and justifications shall remain distinguishable from source-originated claims and shall not automatically override them.
 
 ### 3.10 Report Generation
 
@@ -307,6 +311,8 @@ The report shall show:
 - relevant evidence;
 - corroborating or conflicting material;
 - assessments;
+- evidentiary-strength characterizations and their basis where used;
+- reviewer corrections and justifications, including their assessment state where used;
 - limitations;
 - document versions;
 - provenance;
@@ -488,7 +494,9 @@ Document existence or authenticity shall not automatically establish every propo
 
 Statements attributed to a person or entity may be represented as evidence or as source claims, depending on the review model.
 
-The implementation shall preserve attribution and provenance without turning attribution into an independent credibility judgment.
+The implementation shall preserve attribution and provenance without turning attribution into an independent credibility judgment. An attributed statement, eyewitness account, or word-of-mouth report shall not be treated as strong evidence solely because it is a statement or because it has an identified speaker.
+
+Where evidentiary strength is characterized, the assessment shall consider the available verification and evidence basis. Examples of evidence that may warrant a stronger characterization within the declared review criteria include a verified video or audio recording, authentic source material, or logically derived information supported by valid proof techniques. Such characterization shall remain transparent and traceable to the evidence and its provenance.
 
 ### 6.3 Corroboration
 
@@ -1025,8 +1033,9 @@ If the workflow receives a legal-conclusion request, preserve the underlying fac
 | AC-L01-11 | Document silence, inaccessible material, incomplete corpus, and insufficient evidence are distinguishable from contradiction. |
 | AC-L01-12 | Document and evidence locations can be inspected and navigated from claims and evidence. |
 | AC-L01-13 | Temporal context and relevant document dates can be represented without silently resolving conflicting timelines. |
-| AC-L01-14 | Human claim corrections preserve prior state, reviewer provenance, and justification. |
+| AC-L01-14 | Human claim corrections are represented as reviewer-originated claims/assertions and preserve prior state, reviewer provenance, and justification. |
 | AC-L01-15 | Human assessment changes preserve prior and revised states and provenance. |
+| AC-L01-16 | Reviewer corrections and their justifications can be assessed against supporting evidence where applicable, with the assessment and provenance preserved. |
 | AC-L01-16 | Evidence chains remain traversable without implying support for every intermediate proposition. |
 | AC-L01-17 | Document changes preserve historical version lineage and prior assessment context where permitted. |
 | AC-L01-18 | Claim changes after assessment preserve the prior claim and prevent silent reuse of its assessment for the revised claim. |
