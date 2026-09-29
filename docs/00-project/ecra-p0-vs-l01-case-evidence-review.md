@@ -1,6 +1,6 @@
 # ECRA Reference Application — VS-L01 Case Evidence Review
 
-> Status: REVIEW
+> Status: APPROVED
 > Authority: ENGINEERING / INFORMATIVE
 > Generation: GEN1
 > Scope: Detailed P0 vertical-slice specification for Case Evidence Review
@@ -1524,4 +1524,4 @@ These shall be resolved only when implementation evidence or an authoritative sp
 
 ## 21. Status
 
-This specification is **REVIEW** and is intended to drive VS-L01 reference-application implementation planning and supporting verification once approved.
+This specification is **APPROVED** and is intended to drive the VS-L01 reference-application implementation and its supporting verification evidence.
