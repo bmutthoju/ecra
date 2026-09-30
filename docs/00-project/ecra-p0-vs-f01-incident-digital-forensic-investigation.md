@@ -1,6 +1,6 @@
 # ECRA Reference Application — VS-F01 Incident / Digital Forensic Investigation
 
-> Status: REVIEW
+> Status: APPROVED
 > Authority: ENGINEERING / INFORMATIVE
 > Generation: GEN1
 > Scope: Detailed P0 vertical-slice specification for Incident / Digital Forensic Investigation
@@ -397,8 +397,7 @@ Where temporal reasoning is material, the application shall preserve:
 - timestamp semantics where known;
 - timezone or offset;
 - clock-offset information where available;
-- normalized/display timestamp where a transformation is applied;
-- transformation provenance;
+- normalized/display timestamp where a transformation is applied;- transformation provenance;
 - source/version context.
 
 Normalization shall not overwrite the original temporal representation.
@@ -797,7 +796,6 @@ When an artifact, observation, or derived evidence representation changes:
 - the new representation has distinct version/lineage information;
 - prior assessments remain associated with the source state on which they were based;
 - affected claims/hypotheses may be reassessed.
-
 ### 5.8 Acquisition and Handling Traceability
 
 Where handling history is material, the traceability path shall permit reconstruction of:
@@ -1197,8 +1195,7 @@ A claim/hypothesis input shall contain:
 An evidence input shall contain:
 
 - stable identity;
-- source/artifact reference;
-- location;
+- source/artifact reference;- location;
 - evidence content or reference;
 - provenance;
 - version/lineage where applicable;
@@ -1597,8 +1594,7 @@ The shared core shall provide only capabilities demonstrated as reusable and nec
 - provenance and traceability;
 - source-state/version handling;
 - integrity/authenticity/authority metadata boundaries;
-- machine representation and semantic round-trip;
-- persistence/storage abstractions;
+- machine representation and semantic round-trip;- persistence/storage abstractions;
 - validation/verification integration boundaries.
 
 VS-F01 does not justify a new forensic-specific semantic root type.
@@ -1998,7 +1994,6 @@ Verify:
 ### 18.5 Competing-Hypothesis Tests
 
 Verify:
-
 - multiple hypotheses can coexist;
 - evidence can support one hypothesis and contradict another;
 - no hypothesis is silently overwritten;
@@ -2147,4 +2142,4 @@ These shall be resolved only when implementation evidence or an authoritative sp
 
 ## 21. Status
 
-This specification is **REVIEW** and is intended to drive VS-F01 reference-application implementation planning and supporting verification once approved.
+This specification is **APPROVED** and is authorized to drive VS-F01 reference-application implementation planning and supporting verification.
