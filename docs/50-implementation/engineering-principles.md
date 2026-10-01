@@ -1,6 +1,6 @@
 # ECRA Generation 1 Reference Implementation — Engineering Principles and Practices
 
-> Status: REVIEW
+> Status: APPROVED
 > Authority: IMPLEMENTATION
 > Generation: GEN1
 > Scope: Reusable engineering principles, practices, patterns, and review criteria for implementing approved Generation 1 vertical slices
@@ -467,4 +467,4 @@ If implementation guidance conflicts with approved requirements, architecture, A
 
 ## 24. Status
 
-This engineering-principles guide is **REVIEW** and is intended for review before governing Generation 1 slice implementation.
+This engineering-principles guide is **APPROVED** and governs Generation 1 slice implementation.
