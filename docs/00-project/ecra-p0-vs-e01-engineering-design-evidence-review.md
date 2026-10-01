@@ -1,6 +1,6 @@
 # ECRA Reference Application — VS-E01 Engineering Design Evidence Review
 
-> Status: REVIEW
+> Status: APPROVED
 > Authority: ENGINEERING / INFORMATIVE
 > Generation: GEN1
 > Scope: Detailed P0 vertical-slice specification for Engineering Design Evidence Review
@@ -2488,4 +2488,4 @@ These shall be resolved only when implementation evidence or an authoritative sp
 
 ## 21. Status
 
-This specification is **REVIEW** and is intended to drive VS-E01 reference-application implementation planning and supporting verification once approved.
+This specification is **APPROVED** and is authorized to drive VS-E01 reference-application implementation planning and supporting verification.
