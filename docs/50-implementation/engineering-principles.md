@@ -287,7 +287,7 @@ For each external or failure-prone dependency, identify applicable:
 
 Do not hide failures by silently substituting data or results. Historical results must not be silently rewritten because a later dependency changed.
 
-## 16. Observability
+## 16. Observability and Operational Investigation
 
 Material behavior should be diagnosable through appropriate:
 
@@ -302,6 +302,10 @@ Material behavior should be diagnosable through appropriate:
 Respect security/privacy boundaries and avoid arbitrary telemetry.
 
 Observability should help establish what happened, when, which operation caused it, which artifact/version was involved, which dependency was used, whether the result was complete, and how it can be reproduced.
+
+Where applicable, observability reports and related operational artifacts may serve as authorized investigative inputs to **VS-F01 — Incident / Digital Forensic Investigation**. The VS-F01 reference application may therefore be used to investigate application or system issues using such evidence where the investigation falls within the approved VS-F01 workflow and applicable authorization boundaries.
+
+This does not make VS-F01 a general-purpose observability platform, automatic root-cause engine, or autonomous incident-response system. The investigation must continue to distinguish observations, evidence, claims or hypotheses, assessments, uncertainty, provenance, and downstream decisions.
 
 ## 17. Performance Engineering
 
@@ -418,6 +422,7 @@ Only the first two categories belong in the current implementation.
 - Is untrusted content handled safely?
 - Is provenance preserved?
 - Is behavior observable and reproducible?
+- Can relevant observability artifacts be used as investigative evidence where the approved VS-F01 workflow permits?
 
 ### Testing
 - Are appropriate test levels applied?
@@ -455,7 +460,8 @@ A slice implementation is engineering-complete only when:
 Read this together with:
 
 - `docs/50-implementation/vertical-slice.md` — slice sequence and scope;
-- `docs/50-implementation/testing-strategy.md` — testing and verification.
+- `docs/50-implementation/testing-strategy.md` — testing and verification;
+- `docs/00-project/ecra-p0-vs-f01-incident-digital-forensic-investigation.md` — approved VS-F01 investigation boundary.
 
 If implementation guidance conflicts with approved requirements, architecture, ADRs, detailed design, contracts, or verification criteria, the higher-authority artifact takes precedence and the conflict must be recorded.
 
