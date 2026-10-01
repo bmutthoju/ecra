@@ -1,6 +1,6 @@
 # ECRA Generation 1 Reference Implementation — Vertical Slice Execution
 
-> Status: REVIEW
+> Status: APPROVED
 > Authority: IMPLEMENTATION
 > Generation: GEN1
 > Scope: Implementation sequence and execution rules for the approved vertical-slice portfolio
@@ -212,4 +212,4 @@ An implementation increment is ready for merge only when:
 
 ## 18. Status
 
-This implementation guidance is **REVIEW** and is intended to govern the first Generation 1 reference-implementation increments once approved.
+This implementation guidance is **APPROVED** and governs the first Generation 1 reference-implementation increments.
