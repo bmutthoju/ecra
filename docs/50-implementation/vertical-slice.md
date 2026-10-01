@@ -145,7 +145,7 @@ Persistence shall be introduced only to the extent required by the selected slic
 
 The implementation shall preserve stable identity, version/lineage, provenance, source locations, relationships, assessment state, and historical review state where required.
 
-Do not create persistence contracts merely to suit a convenient storage engine.
+Do not define persistence contracts merely to suit a convenient storage engine.
 
 ## 12. Security and Operational Baseline
 
