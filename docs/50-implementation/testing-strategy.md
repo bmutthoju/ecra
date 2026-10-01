@@ -1,6 +1,6 @@
 # ECRA Generation 1 Reference Implementation — Testing Strategy
 
-> Status: REVIEW
+> Status: APPROVED
 > Authority: IMPLEMENTATION
 > Generation: GEN1
 > Scope: Testing and verification strategy for the reference implementation
@@ -148,4 +148,4 @@ Testing is sufficient for an implementation increment when:
 
 ## 16. Status
 
-This testing strategy is **REVIEW** and shall govern implementation verification once approved.
+This testing strategy is **APPROVED** and governs implementation verification.
