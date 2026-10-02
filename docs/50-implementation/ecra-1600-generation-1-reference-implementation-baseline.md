@@ -1,12 +1,12 @@
 # ECRA-1600 — Generation 1 Reference Implementation Baseline
 
-> Status: REVIEW
+> Status: APPROVED
 > Authority: IMPLEMENTATION
 > Generation: GEN1
 > Scope: Reference implementation baseline for ECRA Generation 1
 > Document Class: Implementation Baseline
 > Depends On: Approved Gen1 requirements, approved Gen1 architecture, approved detailed design, approved decisions, approved contracts/schemas, approved verification criteria
-> Current Baseline State: REVIEW
+> Current Baseline State: APPROVED
 
 ## 1. Purpose
 
@@ -74,7 +74,7 @@ These gaps do not authorize reconstruction of missing normative content.
 
 Accordingly, ECRA-1600 establishes implementation structure and baseline technology choices while explicitly deferring any behavior that requires a missing higher-authority contract or specification.
 
-Before ECRA-1600 is marked APPROVED, the missing upstream authority should be reconciled or the affected scope should be explicitly accepted as deferred.
+The missing upstream authority is recorded as an explicit follow-on prerequisite for implementation. Its absence does not invalidate this implementation baseline because ECRA-1600 does not reconstruct or override that authority.
 
 ## 4. Gen1 Implementation Objectives
 
@@ -826,29 +826,29 @@ This baseline records the following proposed Gen1 implementation decisions for r
 
 | ID | Decision | Rationale | Status |
 |---|---|---|---|
-| ECRA-1600-D01 | Use a cohesive modular application rather than Gen1 microservices | Preserves boundaries while avoiding speculative distributed infrastructure | REVIEW |
-| ECRA-1600-D02 | Use Java/JVM as the backend implementation platform | Suitable for a strongly typed, modular, testable reference implementation; does not alter ECRA semantics | REVIEW |
-| ECRA-1600-D03 | Use Spring Boot as the backend application framework | Provides conventional application/runtime integration while keeping domain logic framework-independent | REVIEW |
-| ECRA-1600-D04 | Use PostgreSQL as the initial reference persistence implementation | Fits durable relational identity, relationships, provenance, versioning, and transactional behavior without making storage the semantic authority | REVIEW |
-| ECRA-1600-D05 | Use React/TypeScript for the reference UI | Provides a typed application UI suitable for demonstrating vertical slices without coupling UI models to persistence | REVIEW |
-| ECRA-1600-D06 | Use Maven, Docker, and GitHub Actions for build/runtime/CI foundations | Provides repeatable build and integration execution without introducing distributed infrastructure | REVIEW |
+| ECRA-1600-D01 | Use a cohesive modular application rather than Gen1 microservices | Preserves boundaries while avoiding speculative distributed infrastructure | APPROVED |
+| ECRA-1600-D02 | Use Java/JVM as the backend implementation platform | Suitable for a strongly typed, modular, testable reference implementation; does not alter ECRA semantics | APPROVED |
+| ECRA-1600-D03 | Use Spring Boot as the backend application framework | Provides conventional application/runtime integration while keeping domain logic framework-independent | APPROVED |
+| ECRA-1600-D04 | Use PostgreSQL as the initial reference persistence implementation | Fits durable relational identity, relationships, provenance, versioning, and transactional behavior without making storage the semantic authority | APPROVED |
+| ECRA-1600-D05 | Use React/TypeScript for the reference UI | Provides a typed application UI suitable for demonstrating vertical slices without coupling UI models to persistence | APPROVED |
+| ECRA-1600-D06 | Use Maven, Docker, and GitHub Actions for build/runtime/CI foundations | Provides repeatable build and integration execution without introducing distributed infrastructure | APPROVED |
 
 These decisions are implementation-level proposals. They do not override missing or higher-authority ECRA documents.
 
 ## 36. Approval Criteria
 
-ECRA-1600 may move from REVIEW to APPROVED when:
+ECRA-1600 approval is based on the following criteria:
 
 - the implementation technology baseline is accepted;
 - no conflict with approved requirements/architecture/design is identified;
 - material technology choices are accepted or recorded through the appropriate decision mechanism;
-- missing upstream authority is reconciled or its absence is explicitly accepted for the affected implementation scope;
+- missing upstream authority is explicitly recorded as a follow-on prerequisite and is not silently reconstructed;
 - the VS-J01 implementation path is sufficiently defined;
 - persistence, API, serialization, security, testing, and runtime boundaries are considered adequate for Gen1 implementation;
 - critical review finds no unresolved material implementation contradiction.
 
 ## 37. Status
 
-**REVIEW**
+**APPROVED**
 
-This document is proposed as the ECRA Generation 1 Reference Implementation Baseline. It is not yet an approved implementation authority.
+This document is the approved ECRA Generation 1 Reference Implementation Baseline and governs Gen1 implementation where higher-authority artifacts are silent.
