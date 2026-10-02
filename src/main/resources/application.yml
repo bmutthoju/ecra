@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: ecra
+
+# Runtime configuration is intentionally minimal until approved
+# API, persistence, security, and observability contracts are established.
